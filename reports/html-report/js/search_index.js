@@ -1,0 +1,1 @@
+var index = {"Tags":{"single word":["specs\\Example Vowels.html"]},"Specs":{"Example Vowels Specification":["specs\\Example Vowels.html"]}};
