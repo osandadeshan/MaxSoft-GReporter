@@ -1,13 +1,14 @@
 /*
- Developer      : Osanda Deshan
- Created Date   : 6/17/2018
- Project        : MaxSoft Email Client For Gauge
- */
+/**
+ * Project Name : MaxSoft Email Client For Gauge
+ * Developer    : Osanda Deshan
+ * Version      : 1.0.0
+ * Date         : 6/23/2018
+ * Time         : 2:56 PM
+ * Description  :
+ **/
 
 package com.maxsoft.emailclient;
-
-import com.maxsoft.emailclient.util.Email;
-import com.maxsoft.emailclient.util.JsonReader;
 
 
 public class EmailSender {

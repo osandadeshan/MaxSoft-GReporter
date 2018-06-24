@@ -1,18 +1,18 @@
 {
 	"projectName": "MaxSoft Email Client For Gauge",
-	"timestamp": "Jun 17, 2018 at 7:31pm",
-	"successRate": 100,
+	"timestamp": "Jun 24, 2018 at 9:10pm",
+	"successRate": 50,
 	"environment": "default",
 	"tags": "",
-	"executionTime": 414,
-	"executionStatus": "pass",
+	"executionTime": 607,
+	"executionStatus": "fail",
 	"specResults": [
 		{
-			"specHeading": "Example Vowels Specification",
-			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels.spec",
+			"specHeading": "Example Vowels2 Specification",
+			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels2.spec",
 			"tags": [],
 			"executionTime": 2,
-			"executionStatus": "pass",
+			"executionStatus": "fail",
 			"scenarios": [
 				{
 					"scenarioHeading": "Vowel counts in single word",
@@ -20,6 +20,159 @@
 						"single word"
 					],
 					"executionTime": 2,
+					"executionStatus": "fail",
+					"contexts": [
+						{
+							"itemType": "step",
+							"stepText": "Vowels in English language are \"aeiou\".",
+							"table": null,
+							"beforeStepHookFailure": null,
+							"afterStepHookFailure": null,
+							"result": {
+								"status": "pass",
+								"stackTrace": "",
+								"screenshot": "",
+								"errorMessage": "",
+								"executionTime": 0,
+								"skippedReason": "",
+								"messages": [],
+								"errorType": "assertion"
+							}
+						}
+					],
+					"teardowns": [],
+					"items": [
+						{
+							"itemType": "step",
+							"stepText": "The word \"gauge\" has \"2\" vowels.",
+							"table": null,
+							"beforeStepHookFailure": null,
+							"afterStepHookFailure": null,
+							"result": {
+								"status": "fail",
+								"stackTrace": "org.testng.Assert.fail(Assert.java:94)\norg.testng.Assert.failNotEquals(Assert.java:494)\norg.testng.Assert.assertEquals(Assert.java:123)\norg.testng.Assert.assertEquals(Assert.java:370)\norg.testng.Assert.assertEquals(Assert.java:380)\nstepdefinitions.StepImplementation.verifyVowelsCountInWord(StepImplementation.java:25)\n",
+								"screenshot": "",
+								"errorMessage": "java.lang.AssertionError: expected [2] but found [3]",
+								"executionTime": 2,
+								"skippedReason": "",
+								"messages": [],
+								"errorType": "assertion"
+							}
+						}
+					],
+					"beforeScenarioHookFailure": null,
+					"afterScenarioHookFailure": null,
+					"skipErrors": [],
+					"tableRowIndex": -1
+				},
+				{
+					"scenarioHeading": "Vowel counts in multiple word",
+					"tags": [],
+					"executionTime": 0,
+					"executionStatus": "pass",
+					"contexts": [
+						{
+							"itemType": "step",
+							"stepText": "Vowels in English language are \"aeiou\".",
+							"table": null,
+							"beforeStepHookFailure": null,
+							"afterStepHookFailure": null,
+							"result": {
+								"status": "pass",
+								"stackTrace": "",
+								"screenshot": "",
+								"errorMessage": "",
+								"executionTime": 0,
+								"skippedReason": "",
+								"messages": [],
+								"errorType": "assertion"
+							}
+						}
+					],
+					"teardowns": [],
+					"items": [
+						{
+							"itemType": "step",
+							"stepText": "Almost all words have vowels",
+							"table": {
+								"headers": [
+									"Word",
+									"Vowel Count"
+								],
+								"rows": [
+									{
+										"cells": [
+											"Gauge",
+											"3"
+										]
+									},
+									{
+										"cells": [
+											"Mingle",
+											"2"
+										]
+									},
+									{
+										"cells": [
+											"Snap",
+											"1"
+										]
+									},
+									{
+										"cells": [
+											"GoCD",
+											"1"
+										]
+									},
+									{
+										"cells": [
+											"Rhythm",
+											"0"
+										]
+									}
+								]
+							},
+							"beforeStepHookFailure": null,
+							"afterStepHookFailure": null,
+							"result": {
+								"status": "pass",
+								"stackTrace": "",
+								"screenshot": "",
+								"errorMessage": "",
+								"executionTime": 0,
+								"skippedReason": "",
+								"messages": [],
+								"errorType": "assertion"
+							}
+						}
+					],
+					"beforeScenarioHookFailure": null,
+					"afterScenarioHookFailure": null,
+					"skipErrors": [],
+					"tableRowIndex": -1
+				}
+			],
+			"isTableDriven": false,
+			"datatable": null,
+			"beforeSpecHookFailure": null,
+			"afterSpecHookFailure": null,
+			"passedScenarioCount": 1,
+			"failedScenarioCount": 1,
+			"skippedScenarioCount": 0
+		},
+		{
+			"specHeading": "Example Vowels1 Specification",
+			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels1.spec",
+			"tags": [],
+			"executionTime": 3,
+			"executionStatus": "pass",
+			"scenarios": [
+				{
+					"scenarioHeading": "Vowel counts in single word",
+					"tags": [
+						"single word"
+					],
+					"executionTime": 3,
 					"executionStatus": "pass",
 					"contexts": [
 						{
@@ -53,7 +206,7 @@
 								"stackTrace": "",
 								"screenshot": "",
 								"errorMessage": "",
-								"executionTime": 2,
+								"executionTime": 3,
 								"skippedReason": "",
 								"messages": [],
 								"errorType": "assertion"
@@ -164,9 +317,9 @@
 	"beforeSuiteHookFailure": null,
 	"afterSuiteHookFailure": null,
 	"passedSpecsCount": 1,
-	"failedSpecsCount": 0,
+	"failedSpecsCount": 1,
 	"skippedSpecsCount": 0,
-	"passedScenariosCount": 2,
-	"failedScenariosCount": 0,
+	"passedScenariosCount": 3,
+	"failedScenariosCount": 1,
 	"skippedScenariosCount": 0
 }

@@ -1,5 +1,5 @@
-Example Vowels Specification
-============================
+Example Vowels2 Specification
+=============================
 Project Name : MaxSoft Email Client For Gauge
 Developer    : Osanda Deshan
 Version      : 1.0.0
@@ -17,7 +17,7 @@ Vowel counts in single word
 ---------------------------
 tags: single word
 
-* The word "gauge" has "3" vowels.
+* The word "gauge" has "2" vowels.
 
 
 
