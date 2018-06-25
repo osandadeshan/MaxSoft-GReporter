@@ -102,7 +102,7 @@ public class EmailTemplate {
             "</table>\n" +
             "<br><br>\n" +
             "\n" +
-            "<img src=\"cid:pie-chart\" alt=\"Pie PieChart For Test Execution Results\" align=\"left\"> <br><br><br>\n" +
+            "<img src=\"cid:pie-chart\" alt=\"Pie Chart For Test Execution Results\" align=\"left\"> <br><br><br>\n" +
             "\n" +
             "<br><br><br><br>\n" +
             "<table>\n" +
@@ -157,7 +157,7 @@ public class EmailTemplate {
                 "<br><br>\n" +
                 "\n" +
                 "\n" +
-                "<img src=\"cid:bar-chart\" alt=\"Bar PieChart For Test Execution Results\" align=\"left\"> \n" +
+                "<img src=\"cid:bar-chart\" alt=\"Bar Chart For Test Execution Results\" align=\"left\"> \n" +
                 "</body>\n" +
                 "</html>";
         return appendHtml + lastAppend;
