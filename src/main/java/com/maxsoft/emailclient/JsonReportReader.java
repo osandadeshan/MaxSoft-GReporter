@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Properties;
 
 
-public class JsonReader {
+public class JsonReportReader {
 
     public static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
     static Properties propertyFile = new Properties();

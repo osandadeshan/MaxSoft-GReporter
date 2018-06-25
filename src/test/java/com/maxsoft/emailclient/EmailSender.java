@@ -14,7 +14,7 @@ package com.maxsoft.emailclient;
 public class EmailSender {
 
     public static void main(String[] args) {
-        Email.send(JsonReader.getExecutionResults());
+        Email.send(JsonReportReader.getExecutionResults());
     }
 
 

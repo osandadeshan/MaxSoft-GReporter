@@ -32,9 +32,7 @@ import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.TextAnchor;
 import org.json.simple.parser.ParseException;
-import org.knowm.xchart.style.Styler;
-
-import static com.maxsoft.emailclient.JsonReader.*;
+import static com.maxsoft.emailclient.JsonReportReader.*;
 
 
 public class BarChart {
@@ -155,8 +153,25 @@ public class BarChart {
         ChartUtilities.saveChartAsPNG( BarChart , barChart , width , height );
     }
 
-    public static int setBarChartHeight(int factor){
-        return factor * 200;
+    public static int setBarChartHeight(int noOfSpecs){
+        try {
+            inputBarChartPropertyFile = new FileInputStream(CURRENT_DIRECTORY + File.separator + "env" + File.separator + "chart"
+                    + File.separator + "barchart.properties");
+            // load a properties file
+            barChartProperties.load(inputBarChartPropertyFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (inputBarChartPropertyFile != null) {
+                try {
+                    inputBarChartPropertyFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return noOfSpecs * Integer.valueOf(barChartProperties.getProperty("bar_chart_height_for_one_spec"));
     }
 
 

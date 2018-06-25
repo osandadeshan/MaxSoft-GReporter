@@ -11,7 +11,7 @@ package com.maxsoft.emailclient;
 
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
-import static com.maxsoft.emailclient.JsonReader.*;
+import static com.maxsoft.emailclient.JsonReportReader.*;
 
 
 public class EmailTemplate {

@@ -185,7 +185,7 @@ public class Email {
 
                 // second part (the pie chart)
                 messageBodyPart = new MimeBodyPart();
-                PieChart.save(JsonReader.getPassedScenarioCount(), JsonReader.getFailedScenarioCount(), JsonReader.getSkippedScenarioCount());
+                PieChart.save(JsonReportReader.getPassedScenarioCount(), JsonReportReader.getFailedScenarioCount(), JsonReportReader.getSkippedScenarioCount());
                 DataSource fds = new FileDataSource(
                         PieChart.getSavedPieChartImagePath());
 
