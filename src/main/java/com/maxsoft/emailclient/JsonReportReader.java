@@ -173,9 +173,8 @@ public class JsonReportReader {
         List<String> specHeadingList = new ArrayList<>();
 
         for (Object object : jsonArray) {
-            JSONObject person = (JSONObject) object;
-
-            String specHeading = person.get("specHeading").toString();
+            JSONObject jsonObject1 = (JSONObject) object;
+            String specHeading = jsonObject1.get("specHeading").toString();
             specHeadingList.add(specHeading);
         }
         return specHeadingList;
@@ -211,9 +210,8 @@ public class JsonReportReader {
         List<String> passedScenarioCountList = new ArrayList<>();
 
         for (Object object : jsonArray) {
-            JSONObject person = (JSONObject) object;
-
-            String passedScenarioCount = person.get("passedScenarioCount").toString();
+            JSONObject jsonObject1 = (JSONObject) object;
+            String passedScenarioCount = jsonObject1.get("passedScenarioCount").toString();
             passedScenarioCountList.add(passedScenarioCount);
         }
         return passedScenarioCountList;
@@ -249,9 +247,8 @@ public class JsonReportReader {
         List<String> failedScenarioCountList = new ArrayList<>();
 
         for (Object object : jsonArray) {
-            JSONObject person = (JSONObject) object;
-
-            String failedScenarioCount = person.get("failedScenarioCount").toString();
+            JSONObject jsonObject1 = (JSONObject) object;
+            String failedScenarioCount = jsonObject1.get("failedScenarioCount").toString();
             failedScenarioCountList.add(failedScenarioCount);
         }
         return failedScenarioCountList;
@@ -287,9 +284,8 @@ public class JsonReportReader {
         List<String> skippedScenarioCountList = new ArrayList<>();
 
         for (Object object : jsonArray) {
-            JSONObject person = (JSONObject) object;
-
-            String skippedScenarioCount = person.get("skippedScenarioCount").toString();
+            JSONObject jsonObject1 = (JSONObject) object;
+            String skippedScenarioCount = jsonObject1.get("skippedScenarioCount").toString();
             skippedScenarioCountList.add(skippedScenarioCount);
         }
         return skippedScenarioCountList;
