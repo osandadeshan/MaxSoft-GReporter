@@ -1,26 +1,26 @@
 {
 	"projectName": "MaxSoft Email Client For Gauge",
-	"timestamp": "Jun 25, 2018 at 9:58pm",
+	"timestamp": "Jul 29, 2018 at 12:14pm",
 	"successRate": 50,
 	"environment": "default",
 	"tags": "",
-	"executionTime": 1034,
+	"executionTime": 1663,
 	"executionStatus": "fail",
 	"specResults": [
 		{
-			"specHeading": "Example Vowels1 Specification",
-			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels1.spec",
+			"specHeading": "Example Vowels2 Specification",
+			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels2.spec",
 			"tags": [],
-			"executionTime": 6,
-			"executionStatus": "pass",
+			"executionTime": 7,
+			"executionStatus": "fail",
 			"scenarios": [
 				{
 					"scenarioHeading": "Vowel counts in single word",
 					"tags": [
 						"single word"
 					],
-					"executionTime": 5,
-					"executionStatus": "pass",
+					"executionTime": 6,
+					"executionStatus": "fail",
 					"contexts": [
 						{
 							"itemType": "step",
@@ -44,16 +44,16 @@
 					"items": [
 						{
 							"itemType": "step",
-							"stepText": "The word \"gauge\" has \"3\" vowels.",
+							"stepText": "The word \"gauge\" has \"2\" vowels.",
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
 							"result": {
-								"status": "pass",
-								"stackTrace": "",
+								"status": "fail",
+								"stackTrace": "org.testng.Assert.fail(Assert.java:94)\norg.testng.Assert.failNotEquals(Assert.java:494)\norg.testng.Assert.assertEquals(Assert.java:123)\norg.testng.Assert.assertEquals(Assert.java:370)\norg.testng.Assert.assertEquals(Assert.java:380)\nstepdefinitions.StepImplementation.verifyVowelsCountInWord(StepImplementation.java:25)\n",
 								"screenshot": "",
-								"errorMessage": "",
-								"executionTime": 5,
+								"errorMessage": "java.lang.AssertionError: expected [2] but found [3]",
+								"executionTime": 6,
 								"skippedReason": "",
 								"messages": [],
 								"errorType": "assertion"
@@ -156,24 +156,24 @@
 			"datatable": null,
 			"beforeSpecHookFailure": null,
 			"afterSpecHookFailure": null,
-			"passedScenarioCount": 2,
-			"failedScenarioCount": 0,
+			"passedScenarioCount": 1,
+			"failedScenarioCount": 1,
 			"skippedScenarioCount": 0
 		},
 		{
-			"specHeading": "Example Vowels2 Specification",
-			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels2.spec",
+			"specHeading": "Example Vowels1 Specification",
+			"fileName": "C:\\Users\\UnimaOs\\IdeaProjects\\MaxSoft Email Client For Gauge\\specs\\Example Vowels1.spec",
 			"tags": [],
-			"executionTime": 4,
-			"executionStatus": "fail",
+			"executionTime": 0,
+			"executionStatus": "pass",
 			"scenarios": [
 				{
 					"scenarioHeading": "Vowel counts in single word",
 					"tags": [
 						"single word"
 					],
-					"executionTime": 4,
-					"executionStatus": "fail",
+					"executionTime": 0,
+					"executionStatus": "pass",
 					"contexts": [
 						{
 							"itemType": "step",
@@ -197,16 +197,16 @@
 					"items": [
 						{
 							"itemType": "step",
-							"stepText": "The word \"gauge\" has \"2\" vowels.",
+							"stepText": "The word \"gauge\" has \"3\" vowels.",
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
 							"result": {
-								"status": "fail",
-								"stackTrace": "org.testng.Assert.fail(Assert.java:94)\norg.testng.Assert.failNotEquals(Assert.java:494)\norg.testng.Assert.assertEquals(Assert.java:123)\norg.testng.Assert.assertEquals(Assert.java:370)\norg.testng.Assert.assertEquals(Assert.java:380)\nstepdefinitions.StepImplementation.verifyVowelsCountInWord(StepImplementation.java:25)\n",
+								"status": "pass",
+								"stackTrace": "",
 								"screenshot": "",
-								"errorMessage": "java.lang.AssertionError: expected [2] but found [3]",
-								"executionTime": 4,
+								"errorMessage": "",
+								"executionTime": 0,
 								"skippedReason": "",
 								"messages": [],
 								"errorType": "assertion"
@@ -309,8 +309,8 @@
 			"datatable": null,
 			"beforeSpecHookFailure": null,
 			"afterSpecHookFailure": null,
-			"passedScenarioCount": 1,
-			"failedScenarioCount": 1,
+			"passedScenarioCount": 2,
+			"failedScenarioCount": 0,
 			"skippedScenarioCount": 0
 		}
 	],
