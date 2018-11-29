@@ -82,6 +82,7 @@
 
 ## License
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/License_icon-mit-2.svg/2000px-License_icon-mit-2.svg.png" alt="MIT License" width="100" height="100"/> [MaxSoft Email Client for Gauge](https://medium.com/@osanda.deshan/maxsoft-email-client-for-gauge-8ae8af8ad32f) is released under [MIT License](https://opensource.org/licenses/MIT)
+
 <br />
 
 ## Copyright
