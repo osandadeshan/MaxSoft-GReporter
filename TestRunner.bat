@@ -1,5 +1,5 @@
 @echo off
-echo MaxSoft Email Client For Gauge .............
+echo MaxSoft GReporter .............
 
 call mvn clean install -DskipTests
 call mvn gauge:execute -DspecsDir="specs"

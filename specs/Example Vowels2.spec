@@ -1,6 +1,6 @@
 Example Vowels2 Specification
 =============================
-Project Name : MaxSoft Email Client For Gauge
+Project Name : MaxSoft GReporter
 Developer    : Osanda Deshan
 Version      : 1.0.0
 Date         : 6/17/2018

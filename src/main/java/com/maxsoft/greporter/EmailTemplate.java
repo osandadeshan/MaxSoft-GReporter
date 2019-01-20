@@ -1,5 +1,5 @@
 /**
- * Project Name : MaxSoft Email Client For Gauge
+ * Project Name : MaxSoft GReporter
  * Developer    : Osanda Deshan
  * Version      : 1.0.0
  * Date         : 6/23/2018
@@ -7,11 +7,11 @@
  * Description  :
  **/
 
-package com.maxsoft.emailclient;
+package com.maxsoft.greporter;
 
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
-import static com.maxsoft.emailclient.JsonReportReader.*;
+import static com.maxsoft.greporter.JsonReportReader.*;
 
 
 public class EmailTemplate {

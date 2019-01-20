@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.maxsoft.emailclient</groupId>
-    <artifactId>MaxSoft-Email-Client-For-Gauge</artifactId>
+    <groupId>com.maxsoft.greporter</groupId>
+    <artifactId>MaxSoft-GReporter</artifactId>
     <version>v1.0.0</version>
 
     <dependencies>
         <dependency>
             <groupId>com.thoughtworks.gauge</groupId>
             <artifactId>gauge-java</artifactId>
-            <version>0.6.6</version>
+            <version>0.6.9</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchart</groupId>
@@ -80,7 +80,7 @@
                  </execution>
              </executions>
              <configuration>
-                 <mainClass>com.maxsoft.emailclient.EmailSender</mainClass>
+                 <mainClass>com.maxsoft.greporter.EmailSender</mainClass>
                  <classpathScope>test</classpathScope>
              </configuration>
          </plugin>
