@@ -1,4 +1,4 @@
-# MaxSoft Email Client For Gauge - Setup Guide
+# MaxSoft GReporter - Setup Guide
 <br />
 
 ## Pre Requisites
