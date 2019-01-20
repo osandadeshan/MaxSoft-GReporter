@@ -61,7 +61,7 @@
 ```
 <br />
 
-## How to use MaxSoft Email Client For Gauge?
+## How to use MaxSoft GReporter?
 1. Clone this gauge project into your computer
 2. Create your gauge tests (i.e: [Gauge Documentation](https://docs.gauge.org/latest/index.html "Gauge Documentation"))
 3. Open **"email.properties"** file (`<rootDir>\env\email\email.properties`) from notepad
@@ -73,7 +73,7 @@
 9. Double click on **"TestRunner.bat"** which is in the root directory
 <br />
 
-## How to build MaxSoft Email Client For Gauge JAR File?
+## How to build MaxSoft GReporter JAR File?
 1. Open the command prompt
 2. Navigate to the directory of the project (`cd <project dir>`)
 3. Execute this command
@@ -81,7 +81,7 @@
 <br />
 
 ## License
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/License_icon-mit-2.svg/2000px-License_icon-mit-2.svg.png" alt="MIT License" width="100" height="100"/> [MaxSoft Email Client for Gauge](https://medium.com/@osanda.deshan/maxsoft-email-client-for-gauge-8ae8af8ad32f) is released under [MIT License](https://opensource.org/licenses/MIT)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/License_icon-mit-2.svg/2000px-License_icon-mit-2.svg.png" alt="MIT License" width="100" height="100"/> [MaxSoft Email Client for Gauge](https://medium.com/greporter) is released under [MIT License](https://opensource.org/licenses/MIT)
 
 <br />
 
