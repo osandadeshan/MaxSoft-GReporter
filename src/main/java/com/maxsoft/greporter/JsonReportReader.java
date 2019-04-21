@@ -27,18 +27,18 @@ import java.util.Properties;
 
 public class JsonReportReader {
 
-    public static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
-    static Properties propertyFile = new Properties();
-    static InputStream input = null;
-    public static String propertyFilePath = CURRENT_DIRECTORY + File.separator + "env" + File.separator + "default"
+    private static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
+    private static Properties propertyFile = new Properties();
+    private static InputStream input = null;
+    private static String propertyFilePath = CURRENT_DIRECTORY + File.separator + "env" + File.separator + "default"
             + File.separator + "default.properties";
 
-    public static String readFile(String path, Charset encoding) throws IOException {
+    private static String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
     }
 
-    public static String milliSecondsToTime(int millisec) {
+    private static String milliSecondsToTime(int millisec) {
         int milli = millisec % 1000;
         int sec = millisec / 1000;
         int second = sec % 60;
@@ -51,6 +51,50 @@ public class JsonReportReader {
         } else {
             return minute + "m " + (second < 10 ? "0" + second : second) + "s " + milli + "ms";
         }
+    }
+
+    public static String getExecutionStatusColor() {
+        switch (getExecutionStatus().toLowerCase()){
+            case "pass":
+                return "style=\"color:green;\"";
+            case "fail":
+                return "style=\"color:red;\"";
+            case "skip":
+                return "style=\"color:gray;\"";
+            default:
+                return "";
+        }
+    }
+
+    public static String getExecutionStatus() {
+        try {
+            input = new FileInputStream(propertyFilePath);
+            // load a properties file
+            propertyFile.load(input);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        String executionStatus = "";
+        try {
+            String jsonFilePath = CURRENT_DIRECTORY + File.separator + propertyFile.getProperty("gauge_reports_dir") + File.separator +
+                    "json-report" + File.separator + "result.json";
+
+            Object responseString = Configuration.defaultConfiguration().jsonProvider().parse(readFile(jsonFilePath, Charset.defaultCharset()));
+
+            executionStatus = JsonPath.read(responseString, "$.executionStatus").toString();
+            executionStatus = executionStatus.substring(0, 1).toUpperCase() + executionStatus.substring(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return executionStatus;
     }
 
     public static String getPassedScenarioCount() {
@@ -336,23 +380,23 @@ public class JsonReportReader {
             Double failRate = Double.valueOf(df.format((double) failedScenariosCount * 100/ totalScenariosCount));
 
             String executionResults = EmailTemplate.get()
-                            .replaceAll("#projectName", projectName)
-                            .replaceAll("#timestamp", timestamp)
-                            .replaceAll("#environment", environment.substring(0, 1).toUpperCase() + environment.substring(1))
-                            .replaceAll("#executionTime", milliSecondsToTime(Integer.valueOf(executionTime)))
-                            .replaceAll("#executionStatus", executionStatus.substring(0, 1).toUpperCase() + executionStatus.substring(1))
-                            .replaceAll("#successRate", successRate + "%")
-                            .replaceAll("#failRate", failRate + "%")
+                    .replaceAll("#projectName", projectName)
+                    .replaceAll("#timestamp", timestamp)
+                    .replaceAll("#environment", environment.substring(0, 1).toUpperCase() + environment.substring(1))
+                    .replaceAll("#executionTime", milliSecondsToTime(Integer.valueOf(executionTime)))
+                    .replaceAll("#executionStatus", executionStatus.substring(0, 1).toUpperCase() + executionStatus.substring(1))
+                    .replaceAll("#successRate", successRate + "%")
+                    .replaceAll("#failRate", failRate + "%")
 
-                            .replaceAll("#totalScenariosCount", String.valueOf(totalScenariosCount))
-                            .replaceAll("#passedScenariosCount", String.valueOf(passedScenariosCount))
-                            .replaceAll("#failedScenariosCount", String.valueOf(failedScenariosCount))
-                            .replaceAll("#skippedScenariosCount", String.valueOf(skippedScenariosCount))
+                    .replaceAll("#totalScenariosCount", String.valueOf(totalScenariosCount))
+                    .replaceAll("#passedScenariosCount", String.valueOf(passedScenariosCount))
+                    .replaceAll("#failedScenariosCount", String.valueOf(failedScenariosCount))
+                    .replaceAll("#skippedScenariosCount", String.valueOf(skippedScenariosCount))
 
-                            .replaceAll("#totalSpecsCount", String.valueOf(totalSpecsCount))
-                            .replaceAll("#passedSpecsCount", String.valueOf(passedSpecsCount))
-                            .replaceAll("#failedSpecsCount", String.valueOf(failedSpecsCount))
-                            .replaceAll("#skippedSpecsCount", String.valueOf(skippedSpecsCount));
+                    .replaceAll("#totalSpecsCount", String.valueOf(totalSpecsCount))
+                    .replaceAll("#passedSpecsCount", String.valueOf(passedSpecsCount))
+                    .replaceAll("#failedSpecsCount", String.valueOf(failedSpecsCount))
+                    .replaceAll("#skippedSpecsCount", String.valueOf(skippedSpecsCount));
 
             return executionResults;
         }
