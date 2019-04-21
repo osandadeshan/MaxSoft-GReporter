@@ -1,4 +1,37 @@
-# MaxSoft GReporter - Setup Guide
+# MaxSoft GReporter
+<br />
+
+## Introduction
+In testing perspective, the test execution report is a vital document where the stakeholders can get an idea of the project health.
+
+Gauge is proving a detailed test execution report with all the error messages and the screenshots incorporated to the failing steps.
+
+But anyhow, QA should manually send the test execution report to the stakeholders by mentioning the number of scenarios executed, passed count, failed count and skipped count. Also in a regression cycle, QA has to send those counts as module wise figures. Further, QA needs to embed pie charts and bar charts to that report to represents the test execution data in a high readable manner.
+
+MaxSoft GReporter is an automated solution for this issue. It acts as a Java plugin for gauge to send the test execution summary to a defined audience.
+
+### Technologies/Frameworks used
+- Java
+- Gauge Framework
+- JFreeChart
+- xChart
+- JSON Simple
+- Jayway JSONPath
+- SMTP
+- MailAPI
+- TestNG
+- Apache Maven
+
+### Supported Platforms
+- Windows
+- Linux
+- Mac OS
+
+### Supported Languages
+- Java
+
+### Advantages
+- Automated emails for test execution summary with graphical representations.
 <br />
 
 ## Pre Requisites
@@ -59,6 +92,10 @@
     spectacle (<version number>)
     xml-report (<version number>)
 ```
+<br />
+
+## MaxSoft GReporter Tutorials
+1. [MaxSoft GReporter](https://medium.com/greporter/maxsoft-email-client-for-gauge-8ae8af8ad32f)
 <br />
 
 ## How to use MaxSoft GReporter?
