@@ -17,7 +17,7 @@ Vowel counts in single word
 ---------------------------
 tags: single word
 
-* The word "gauge" has "2" vowels.
+* The word "gauge" has "3" vowels.
 
 
 
