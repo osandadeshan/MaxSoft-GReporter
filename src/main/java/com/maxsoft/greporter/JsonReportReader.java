@@ -33,6 +33,8 @@ public class JsonReportReader {
     private static String propertyFilePath = CURRENT_DIRECTORY + File.separator + "env" + File.separator + "default"
             + File.separator + "default.properties";
 
+    private static DecimalFormat df = new DecimalFormat(".##");
+
     private static String readFile(String path, Charset encoding) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
@@ -296,7 +298,10 @@ public class JsonReportReader {
             int failedScenarioCount = Integer.valueOf(jsonObject1.get("failedScenarioCount").toString());
             int skippedScenarioCount = Integer.valueOf(jsonObject1.get("skippedScenarioCount").toString());
             int totalScenarioCount = passedScenarioCount + failedScenarioCount + skippedScenarioCount;
-            double passedScenariosPercentage = (double) (passedScenarioCount/totalScenarioCount) * 100;
+            double passedScenariosPercentage = 0;
+            if (totalScenarioCount != 0) {
+                passedScenariosPercentage = Double.parseDouble(df.format((double) (passedScenarioCount * 100) / (double) totalScenarioCount));
+            }
             passedScenariosPercentageList.add(passedScenariosPercentage + "%");
         }
         return passedScenariosPercentageList;
@@ -374,7 +379,10 @@ public class JsonReportReader {
             int failedScenarioCount = Integer.valueOf(jsonObject1.get("failedScenarioCount").toString());
             int skippedScenarioCount = Integer.valueOf(jsonObject1.get("skippedScenarioCount").toString());
             int totalScenarioCount = passedScenarioCount + failedScenarioCount + skippedScenarioCount;
-            double failedScenariosPercentage = (double) (failedScenarioCount/totalScenarioCount) * 100;
+            double failedScenariosPercentage = 0;
+            if (totalScenarioCount != 0) {
+                failedScenariosPercentage = Double.parseDouble(df.format((double) (failedScenarioCount * 100) /(double) totalScenarioCount));
+            }
             failedScenariosPercentageList.add(failedScenariosPercentage + "%");
         }
         return failedScenariosPercentageList;
@@ -452,7 +460,10 @@ public class JsonReportReader {
             int failedScenarioCount = Integer.valueOf(jsonObject1.get("failedScenarioCount").toString());
             int skippedScenarioCount = Integer.valueOf(jsonObject1.get("skippedScenarioCount").toString());
             int totalScenarioCount = passedScenarioCount + failedScenarioCount + skippedScenarioCount;
-            double skippedScenariosPercentage = (double) (skippedScenarioCount/totalScenarioCount) * 100;
+            double skippedScenariosPercentage = 0;
+            if(totalScenarioCount != 0){
+                skippedScenariosPercentage = Double.parseDouble(df.format((double) (skippedScenarioCount * 100) / (double) totalScenarioCount));
+            }
             skippedScenariosPercentageList.add(skippedScenariosPercentage + "%");
         }
         return skippedScenariosPercentageList;
@@ -492,19 +503,18 @@ public class JsonReportReader {
             int failedScenariosCount = Integer.valueOf(JsonPath.read(responseString, "$.failedScenariosCount").toString());
             int skippedScenariosCount = Integer.valueOf(JsonPath.read(responseString, "$.skippedScenariosCount").toString());
             int totalScenariosCount = passedScenariosCount + failedScenariosCount + skippedScenariosCount;
-            double passedScenariosPercentage = (double) (passedScenariosCount/totalScenariosCount) * 100;
-            double failedScenariosPercentage = (double) (failedScenariosCount/totalScenariosCount) * 100;
-            double skippedScenariosPercentage = (double) (skippedScenariosCount/totalScenariosCount) * 100;
+            double passedScenariosPercentage = Double.parseDouble(df.format((double) (passedScenariosCount * 100) / (double) totalScenariosCount));
+            double failedScenariosPercentage = Double.parseDouble(df.format((double) (failedScenariosCount * 100) / (double) totalScenariosCount));
+            double skippedScenariosPercentage = Double.parseDouble(df.format((double) (skippedScenariosCount * 100) / (double) totalScenariosCount));
 
             int passedSpecsCount = Integer.valueOf(JsonPath.read(responseString, "$.passedSpecsCount").toString());
             int failedSpecsCount = Integer.valueOf(JsonPath.read(responseString, "$.failedSpecsCount").toString());
             int skippedSpecsCount = Integer.valueOf(JsonPath.read(responseString, "$.skippedSpecsCount").toString());
             int totalSpecsCount = passedSpecsCount + failedSpecsCount + skippedSpecsCount;
-            double passedSpecsPercentage = (double) (passedSpecsCount/totalSpecsCount) * 100;
-            double failedSpecsPercentage = (double) (failedSpecsCount/totalSpecsCount) * 100;
-            double skippedSpecsPercentage = (double) (skippedSpecsCount/totalSpecsCount) * 100;
+            double passedSpecsPercentage = Double.parseDouble(df.format((double) (passedSpecsCount * 100) / (double) totalSpecsCount));
+            double failedSpecsPercentage = Double.parseDouble(df.format((double) (failedSpecsCount * 100) / (double) totalSpecsCount));
+            double skippedSpecsPercentage = Double.parseDouble(df.format((double) (skippedSpecsCount * 100) / (double) totalSpecsCount));
 
-            DecimalFormat df = new DecimalFormat(".##");
             Double successRate = Double.valueOf(df.format((double) passedScenariosCount * 100/ totalScenariosCount));
             Double failRate = Double.valueOf(df.format((double) failedScenariosCount * 100/ totalScenariosCount));
 
