@@ -1,15 +1,15 @@
 {
 	"projectName": "MaxSoft-GReporter",
-	"timestamp": "Jan 20, 2019 at 4:58pm",
-	"successRate": 50,
+	"timestamp": "Jun 25, 2019 at 11:56am",
+	"successRate": 100,
 	"environment": "default",
 	"tags": "",
-	"executionTime": 2254,
-	"executionStatus": "fail",
+	"executionTime": 191,
+	"executionStatus": "pass",
 	"specResults": [
 		{
 			"specHeading": "Example Vowels1 Specification",
-			"fileName": "C:\\Users\\onimalarathna\\IdeaProjects\\MaxSoft-GReporter\\specs\\Example Vowels1.spec",
+			"fileName": "C:\\Users\\onimalarat\\IdeaProjects\\MaxSoft-GReporter\\specs\\Example Vowels1.spec",
 			"tags": [],
 			"executionTime": 2,
 			"executionStatus": "pass",
@@ -25,6 +25,14 @@
 						{
 							"itemType": "step",
 							"stepText": "Vowels in English language are \"aeiou\".",
+							"parameters": [
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "aeiou",
+									"table": null
+								}
+							],
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
@@ -45,6 +53,20 @@
 						{
 							"itemType": "step",
 							"stepText": "The word \"gauge\" has \"3\" vowels.",
+							"parameters": [
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "gauge",
+									"table": null
+								},
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "3",
+									"table": null
+								}
+							],
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
@@ -74,6 +96,14 @@
 						{
 							"itemType": "step",
 							"stepText": "Vowels in English language are \"aeiou\".",
+							"parameters": [
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "aeiou",
+									"table": null
+								}
+							],
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
@@ -94,6 +124,51 @@
 						{
 							"itemType": "step",
 							"stepText": "Almost all words have vowels",
+							"parameters": [
+								{
+									"parameterType": "table",
+									"name": "",
+									"value": "",
+									"table": {
+										"headers": [
+											"Word",
+											"Vowel Count"
+										],
+										"rows": [
+											{
+												"cells": [
+													"Gauge",
+													"3"
+												]
+											},
+											{
+												"cells": [
+													"Mingle",
+													"2"
+												]
+											},
+											{
+												"cells": [
+													"Snap",
+													"1"
+												]
+											},
+											{
+												"cells": [
+													"GoCD",
+													"1"
+												]
+											},
+											{
+												"cells": [
+													"Rhythm",
+													"0"
+												]
+											}
+										]
+									}
+								}
+							],
 							"table": {
 								"headers": [
 									"Word",
@@ -162,22 +237,30 @@
 		},
 		{
 			"specHeading": "Example Vowels2 Specification",
-			"fileName": "C:\\Users\\onimalarathna\\IdeaProjects\\MaxSoft-GReporter\\specs\\Example Vowels2.spec",
+			"fileName": "C:\\Users\\onimalarat\\IdeaProjects\\MaxSoft-GReporter\\specs\\Example Vowels2.spec",
 			"tags": [],
-			"executionTime": 1,
-			"executionStatus": "fail",
+			"executionTime": 0,
+			"executionStatus": "pass",
 			"scenarios": [
 				{
 					"scenarioHeading": "Vowel counts in single word",
 					"tags": [
 						"single word"
 					],
-					"executionTime": 1,
-					"executionStatus": "fail",
+					"executionTime": 0,
+					"executionStatus": "pass",
 					"contexts": [
 						{
 							"itemType": "step",
 							"stepText": "Vowels in English language are \"aeiou\".",
+							"parameters": [
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "aeiou",
+									"table": null
+								}
+							],
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
@@ -197,16 +280,30 @@
 					"items": [
 						{
 							"itemType": "step",
-							"stepText": "The word \"gauge\" has \"2\" vowels.",
+							"stepText": "The word \"gauge\" has \"3\" vowels.",
+							"parameters": [
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "gauge",
+									"table": null
+								},
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "3",
+									"table": null
+								}
+							],
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
 							"result": {
-								"status": "fail",
-								"stackTrace": "org.testng.Assert.fail(Assert.java:94)\norg.testng.Assert.failNotEquals(Assert.java:494)\norg.testng.Assert.assertEquals(Assert.java:123)\norg.testng.Assert.assertEquals(Assert.java:370)\norg.testng.Assert.assertEquals(Assert.java:380)\nstepdefinitions.StepImplementation.verifyVowelsCountInWord(StepImplementation.java:25)\n",
+								"status": "pass",
+								"stackTrace": "",
 								"screenshot": "",
-								"errorMessage": "java.lang.AssertionError: expected [2] but found [3]",
-								"executionTime": 1,
+								"errorMessage": "",
+								"executionTime": 0,
 								"skippedReason": "",
 								"messages": [],
 								"errorType": "assertion"
@@ -227,6 +324,14 @@
 						{
 							"itemType": "step",
 							"stepText": "Vowels in English language are \"aeiou\".",
+							"parameters": [
+								{
+									"parameterType": "static",
+									"name": "",
+									"value": "aeiou",
+									"table": null
+								}
+							],
 							"table": null,
 							"beforeStepHookFailure": null,
 							"afterStepHookFailure": null,
@@ -247,6 +352,51 @@
 						{
 							"itemType": "step",
 							"stepText": "Almost all words have vowels",
+							"parameters": [
+								{
+									"parameterType": "table",
+									"name": "",
+									"value": "",
+									"table": {
+										"headers": [
+											"Word",
+											"Vowel Count"
+										],
+										"rows": [
+											{
+												"cells": [
+													"Gauge",
+													"3"
+												]
+											},
+											{
+												"cells": [
+													"Mingle",
+													"2"
+												]
+											},
+											{
+												"cells": [
+													"Snap",
+													"1"
+												]
+											},
+											{
+												"cells": [
+													"GoCD",
+													"1"
+												]
+											},
+											{
+												"cells": [
+													"Rhythm",
+													"0"
+												]
+											}
+										]
+									}
+								}
+							],
 							"table": {
 								"headers": [
 									"Word",
@@ -309,17 +459,17 @@
 			"datatable": null,
 			"beforeSpecHookFailure": null,
 			"afterSpecHookFailure": null,
-			"passedScenarioCount": 1,
-			"failedScenarioCount": 1,
+			"passedScenarioCount": 2,
+			"failedScenarioCount": 0,
 			"skippedScenarioCount": 0
 		}
 	],
 	"beforeSuiteHookFailure": null,
 	"afterSuiteHookFailure": null,
-	"passedSpecsCount": 1,
-	"failedSpecsCount": 1,
+	"passedSpecsCount": 2,
+	"failedSpecsCount": 0,
 	"skippedSpecsCount": 0,
-	"passedScenariosCount": 3,
-	"failedScenariosCount": 1,
+	"passedScenariosCount": 4,
+	"failedScenariosCount": 0,
 	"skippedScenariosCount": 0
 }
