@@ -112,7 +112,7 @@ MaxSoft GReporter is an automated solution for this issue. It acts as a Java plu
 7. Open **"barchart.properties"** file (`<rootDir>\env\chart\barchart.properties`) from notepad
 8. Change the properties and Save it
 9. Double click on **"TestRunner.bat"** which is in the root directory
-10. After the execution is completed, GReporter will push an email to the given audience including the test execution summary.
+10. After the execution is completed, GReporter will push an email to the given audience including the test execution summary
 ![GReporter v1.0.3](https://i.imgur.com/xEovMLC.png)
 <br />
 
