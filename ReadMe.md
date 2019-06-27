@@ -112,6 +112,7 @@ MaxSoft GReporter is an automated solution for this issue. It acts as a Java plu
 7. Open **"barchart.properties"** file (`<rootDir>\env\chart\barchart.properties`) from notepad
 8. Change the properties and Save it
 9. Double click on **"TestRunner.bat"** which is in the root directory
+
 Sample Email
 ![GReporter v1.0.3](https://drive.google.com/file/d/1uZos0wsfeUAF2nvnsHhYXGeuJ-ktx2Kz/view?usp=sharing)
 <br />
