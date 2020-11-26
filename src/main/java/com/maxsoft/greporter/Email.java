@@ -1,21 +1,8 @@
-/**
- * Project Name : MaxSoft GReporter
- * Developer    : Osanda Deshan
- * Version      : 1.0.0
- * Date         : 6/23/2018
- * Time         : 2:56 PM
- * Description  :
- **/
-
 package com.maxsoft.greporter;
 
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -24,7 +11,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
+/*
+ * Project Name : MaxSoft GReporter
+ * Developer    : Osanda Deshan
+ * Version      : 1.0.0
+ * Date         : 6/23/2018
+ * Time         : 2:56 PM
+ * Description  :
+ */
 
 public class Email {
 
@@ -35,27 +35,22 @@ public class Email {
     private static final String UAT = "uat";
     private static final String PROD = "prod";
 
-    private static Properties emailProperties = new Properties();
+    private static final Properties emailProperties = new Properties();
+    static String fileSeparator = File.separator;
     private static InputStream inputEmailPropertyFile = null;
-
-    private static String environment = "";
-    private static String isEmailNeeded = "";
-    private static String senderEmailAddress = "";
-    private static String senderEmailPassword = "";
-    private static String recipientsEmailAddresses = "";
-    private static String emailSubject = "";
-    private static String emailBodyTitleHeadingSize = "";
-    private static String emailBodyTitle = "";
-    private static String emailBody = "";
-    private static String emailFooterLine1 = "";
-    private static String emailFooterLine2 = "";
-    private static String emailFooterLine3 = "";
+    private static String isEmailNeeded;
+    private static String senderEmailAddress;
+    private static String senderEmailPassword;
+    private static String recipientsEmailAddresses;
+    private static String emailSubject;
+    private static String emailBodyTitleHeadingSize;
+    private static String emailBodyTitle;
+    private static String emailBody;
 
     private static void setEmailConfigurations() {
         try {
-            inputEmailPropertyFile = new FileInputStream(CURRENT_DIRECTORY + File.separator + "env" + File.separator + "email"
-                    + File.separator + "email.properties");
-            // load a properties file
+            inputEmailPropertyFile = new FileInputStream(CURRENT_DIRECTORY + fileSeparator + "env" + fileSeparator + "email"
+                    + fileSeparator + "email.properties");
             emailProperties.load(inputEmailPropertyFile);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -69,14 +64,14 @@ public class Email {
             }
         }
 
-        if(System.getProperty("emailConfigEnv") == null){
+        String environment;
+        if (System.getProperty("emailConfigEnv") == null) {
             environment = DEV;
         } else {
             environment = System.getProperty("emailConfigEnv");
         }
 
         switch (environment.toLowerCase()) {
-
             case DEV:
                 isEmailNeeded = emailProperties.getProperty("dev_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("dev_sender_email_address");
@@ -86,11 +81,7 @@ public class Email {
                 emailBodyTitleHeadingSize = emailProperties.getProperty("dev_email_body_title_heading_size");
                 emailBodyTitle = emailProperties.getProperty("dev_email_body_title");
                 emailBody = emailProperties.getProperty("dev_email_body");
-                emailFooterLine1 = emailProperties.getProperty("dev_email_footer_line1");
-                emailFooterLine2 = emailProperties.getProperty("dev_email_footer_line2");
-                emailFooterLine3 = emailProperties.getProperty("dev_email_footer_line3");
                 break;
-
             case QA:
                 isEmailNeeded = emailProperties.getProperty("qa_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("qa_sender_email_address");
@@ -100,11 +91,7 @@ public class Email {
                 emailBodyTitleHeadingSize = emailProperties.getProperty("qa_email_body_title_heading_size");
                 emailBodyTitle = emailProperties.getProperty("qa_email_body_title");
                 emailBody = emailProperties.getProperty("qa_email_body");
-                emailFooterLine1 = emailProperties.getProperty("qa_email_footer_line1");
-                emailFooterLine2 = emailProperties.getProperty("qa_email_footer_line2");
-                emailFooterLine3 = emailProperties.getProperty("qa_email_footer_line3");
                 break;
-
             case UAT:
                 isEmailNeeded = emailProperties.getProperty("uat_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("uat_sender_email_address");
@@ -114,11 +101,7 @@ public class Email {
                 emailBodyTitleHeadingSize = emailProperties.getProperty("uat_email_body_title_heading_size");
                 emailBodyTitle = emailProperties.getProperty("uat_email_body_title");
                 emailBody = emailProperties.getProperty("uat_email_body");
-                emailFooterLine1 = emailProperties.getProperty("uat_email_footer_line1");
-                emailFooterLine2 = emailProperties.getProperty("uat_email_footer_line2");
-                emailFooterLine3 = emailProperties.getProperty("uat_email_footer_line3");
                 break;
-
             case PROD:
                 isEmailNeeded = emailProperties.getProperty("prod_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("prod_sender_email_address");
@@ -128,11 +111,7 @@ public class Email {
                 emailBodyTitleHeadingSize = emailProperties.getProperty("prod_email_body_title_heading_size");
                 emailBodyTitle = emailProperties.getProperty("prod_email_body_title");
                 emailBody = emailProperties.getProperty("prod_email_body");
-                emailFooterLine1 = emailProperties.getProperty("prod_email_footer_line1");
-                emailFooterLine2 = emailProperties.getProperty("prod_email_footer_line2");
-                emailFooterLine3 = emailProperties.getProperty("prod_email_footer_line3");
                 break;
-
             default:
                 Assert.fail("\n\nPlease enter an valid environment dev|qa|uat|prod " +
                         "into the \"emailConfigEnv\" property in <project_dir>/pom.xml\n\n");
@@ -144,7 +123,6 @@ public class Email {
 
         if (isEmailNeeded.toLowerCase().equals("true") || isEmailNeeded.toLowerCase().equals("yes")
                 || isEmailNeeded.toLowerCase().equals("y")) {
-
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
@@ -177,16 +155,18 @@ public class Email {
 
                 // first part (the html)
                 BodyPart messageBodyPart = new MimeBodyPart();
-                String htmlText = "<h2 style=\"color:black;\"> Test Execution Status: " + "<span " + JsonReportReader.getExecutionStatusColor() + ">" + JsonReportReader.getExecutionStatus() + "</h2><br />" +
-                        "<h" + emailBodyTitleHeadingSize + ">" + emailBodyTitle + "</h" + emailBodyTitleHeadingSize + ">" + "<br />" +
-                        emailBody + "<br /><br /><br />" + executionResults;
+                String htmlText = "<h2 style=\"color:black;\"> Test Execution Status: " + "<span "
+                        + JsonReportReader.getExecutionStatusColor() + ">" + JsonReportReader.getExecutionStatus()
+                        + "</h2><br />" + "<h" + emailBodyTitleHeadingSize + ">" + emailBodyTitle + "</h"
+                        + emailBodyTitleHeadingSize + ">" + "<br />" + emailBody + "<br /><br /><br />" + executionResults;
                 messageBodyPart.setContent(htmlText, "text/html");
                 // add it
                 multipart.addBodyPart(messageBodyPart);
 
                 // second part (the pie chart)
                 messageBodyPart = new MimeBodyPart();
-                PieChart.save(JsonReportReader.getPassedScenarioCount(), JsonReportReader.getFailedScenarioCount(), JsonReportReader.getSkippedScenarioCount());
+                PieChart.save(JsonReportReader.getPassedScenarioCount(), JsonReportReader.getFailedScenarioCount(),
+                        JsonReportReader.getSkippedScenarioCount());
                 DataSource fds = new FileDataSource(
                         PieChart.getSavedPieChartImagePath());
 
@@ -217,12 +197,9 @@ public class Email {
 
                 System.out.println("Sent message successfully....");
 
-
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
 
@@ -231,6 +208,4 @@ public class Email {
                     "To turn on, go to <project_dir>/env/email/email.properties\n\n");
         }
     }
-
-
 }
