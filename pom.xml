@@ -6,13 +6,13 @@
 
     <groupId>com.maxsoft.greporter</groupId>
     <artifactId>MaxSoft-GReporter</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <dependencies>
         <dependency>
             <groupId>com.thoughtworks.gauge</groupId>
             <artifactId>gauge-java</artifactId>
-            <version>0.7.2</version>
+            <version>0.7.4</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchart</groupId>
