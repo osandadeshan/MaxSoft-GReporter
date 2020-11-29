@@ -41,6 +41,8 @@ public class Email {
     private static String isEmailNeeded;
     private static String senderEmailAddress;
     private static String senderEmailPassword;
+    private static String senderEmailSmtpHost;
+    private static String senderEmailSmtpPort;
     private static String recipientsEmailAddresses;
     private static String emailSubject;
     private static String emailBodyTitleHeadingSize;
@@ -76,6 +78,8 @@ public class Email {
                 isEmailNeeded = emailProperties.getProperty("dev_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("dev_sender_email_address");
                 senderEmailPassword = emailProperties.getProperty("dev_sender_email_password");
+                senderEmailSmtpHost = emailProperties.getProperty("dev_sender_email_smtp_host");
+                senderEmailSmtpPort = emailProperties.getProperty("dev_sender_email_smtp_port");
                 recipientsEmailAddresses = emailProperties.getProperty("dev_recipients_email_addresses");
                 emailSubject = emailProperties.getProperty("dev_email_subject");
                 emailBodyTitleHeadingSize = emailProperties.getProperty("dev_email_body_title_heading_size");
@@ -86,6 +90,8 @@ public class Email {
                 isEmailNeeded = emailProperties.getProperty("qa_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("qa_sender_email_address");
                 senderEmailPassword = emailProperties.getProperty("qa_sender_email_password");
+                senderEmailSmtpHost = emailProperties.getProperty("qa_sender_email_smtp_host");
+                senderEmailSmtpPort = emailProperties.getProperty("qa_sender_email_smtp_port");
                 recipientsEmailAddresses = emailProperties.getProperty("qa_recipients_email_addresses");
                 emailSubject = emailProperties.getProperty("qa_email_subject");
                 emailBodyTitleHeadingSize = emailProperties.getProperty("qa_email_body_title_heading_size");
@@ -96,6 +102,8 @@ public class Email {
                 isEmailNeeded = emailProperties.getProperty("uat_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("uat_sender_email_address");
                 senderEmailPassword = emailProperties.getProperty("uat_sender_email_password");
+                senderEmailSmtpHost = emailProperties.getProperty("uat_sender_email_smtp_host");
+                senderEmailSmtpPort = emailProperties.getProperty("uat_sender_email_smtp_port");
                 recipientsEmailAddresses = emailProperties.getProperty("uat_recipients_email_addresses");
                 emailSubject = emailProperties.getProperty("uat_email_subject");
                 emailBodyTitleHeadingSize = emailProperties.getProperty("uat_email_body_title_heading_size");
@@ -106,6 +114,8 @@ public class Email {
                 isEmailNeeded = emailProperties.getProperty("prod_is_email_notifications_needed");
                 senderEmailAddress = emailProperties.getProperty("prod_sender_email_address");
                 senderEmailPassword = emailProperties.getProperty("prod_sender_email_password");
+                senderEmailSmtpHost = emailProperties.getProperty("prod_sender_email_smtp_host");
+                senderEmailSmtpPort = emailProperties.getProperty("prod_sender_email_smtp_port");
                 recipientsEmailAddresses = emailProperties.getProperty("prod_recipients_email_addresses");
                 emailSubject = emailProperties.getProperty("prod_email_subject");
                 emailBodyTitleHeadingSize = emailProperties.getProperty("prod_email_body_title_heading_size");
@@ -126,8 +136,8 @@ public class Email {
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.host", senderEmailSmtpHost);
+            props.put("mail.smtp.port", senderEmailSmtpPort);
 
             Session session = Session.getInstance(props,
                     new javax.mail.Authenticator() {
@@ -157,7 +167,7 @@ public class Email {
                 BodyPart messageBodyPart = new MimeBodyPart();
                 String htmlText = "<h2 style=\"color:black;\"> Test Execution Status: " + "<span "
                         + JsonReportReader.getExecutionStatusColor() + ">" + JsonReportReader.getExecutionStatus()
-                        + "</h2><br />" + "<h" + emailBodyTitleHeadingSize + ">" + emailBodyTitle + "</h"
+                        + "</span></h2><br />" + "<h" + emailBodyTitleHeadingSize + ">" + emailBodyTitle + "</h"
                         + emailBodyTitleHeadingSize + ">" + "<br />" + emailBody + "<br /><br /><br />" + executionResults;
                 messageBodyPart.setContent(htmlText, "text/html");
                 // add it
