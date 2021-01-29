@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.maxsoft.greporter.Constants.JSON_FILE_PATH;
+import static com.maxsoft.greporter.Constants.*;
 
 /*
   Project Name : MaxSoft GReporter
@@ -55,11 +55,11 @@ public class JsonReportReader {
     public static String getExecutionStatusColor() {
         switch (getExecutionStatus().toLowerCase()) {
             case "passed":
-                return "style=\"color:green;\"";
+                return GREEN;
             case "failed":
-                return "style=\"color:red;\"";
+                return RED;
             case "skipped":
-                return "style=\"color:gray;\"";
+                return GRAY;
             default:
                 return "";
         }

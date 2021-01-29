@@ -1,6 +1,5 @@
 package com.maxsoft.greporter.email;
 
-import com.maxsoft.greporter.JsonReportReader;
 import com.maxsoft.greporter.chart.BarChart;
 import com.maxsoft.greporter.chart.PieChart;
 import org.json.simple.parser.ParseException;
@@ -17,9 +16,9 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
-import static com.maxsoft.greporter.util.PropertyReader.read;
 import static com.maxsoft.greporter.Constants.EMAIL_PROPERTY_FILE_PATH;
 import static com.maxsoft.greporter.JsonReportReader.*;
+import static com.maxsoft.greporter.util.PropertyReader.read;
 
 /*
  * Project Name : MaxSoft GReporter
@@ -85,8 +84,8 @@ public class EmailProcessor {
 
                 // first part (the html)
                 BodyPart messageBodyPart = new MimeBodyPart();
-                String htmlText = "<h2 style=\"color:black;\"> Test Execution Status: " + "<span "
-                        + JsonReportReader.getExecutionStatusColor() + ">" + JsonReportReader.getExecutionStatus()
+                String htmlText = "<h2 style=\"color:black;\"> Test Execution Status: " + "<span style=\"color:"
+                        + getExecutionStatusColor() + ";\">" + getExecutionStatus()
                         + "</span></h2><br />" + "<h" + emailBodyTitleHeadingSize + ">" + emailBodyTitle + "</h"
                         + emailBodyTitleHeadingSize + ">" + "<br />" + emailBody + "<br /><br /><br />"
                         + getExecutionResults();
@@ -96,8 +95,7 @@ public class EmailProcessor {
 
                 // second part (the pie chart)
                 messageBodyPart = new MimeBodyPart();
-                PieChart.save(JsonReportReader.getPassedScenariosCount(), JsonReportReader.getFailedScenariosCount(),
-                        JsonReportReader.getSkippedScenariosCount());
+                PieChart.save(getPassedScenariosCount(), getFailedScenariosCount(), getSkippedScenariosCount());
                 DataSource fds = new FileDataSource(
                         PieChart.getSavedPieChartImagePath());
 
@@ -147,6 +145,7 @@ public class EmailProcessor {
                     .replaceAll("#environment", getEnvironment())
                     .replaceAll("#executionTime", milliSecondsToTime(getExecutionTime()))
                     .replaceAll("#executionStatus", getExecutionStatus())
+                    .replaceAll("#executionColor", getExecutionStatusColor())
                     .replaceAll("#successRate", getPassedScenariosPercentage() + "%")
                     .replaceAll("#failRate", getFailedScenariosPercentage() + "%")
 

@@ -23,4 +23,8 @@ public class Constants {
             + FILE_SEPARATOR + "email" + FILE_SEPARATOR + "email.properties";
     public static final String JSON_FILE_PATH = System.getProperty("user.dir") + FILE_SEPARATOR + "reports"
             + FILE_SEPARATOR + "json-report" + FILE_SEPARATOR + "result.json";
+    public static final String GREEN = "green";
+    public static final String RED = "red";
+    public static final String GRAY = "#43433D";
+    public static final String BLACK = "black";
 }

@@ -4,6 +4,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
+import static com.maxsoft.greporter.Constants.*;
 import static com.maxsoft.greporter.JsonReportReader.*;
 
 /*
@@ -26,42 +27,42 @@ public class EmailTemplate {
                 "            <table style=\"width:70%; border:1px solid black; border-collapse:collapse;\">" +
                 "              <col width=45%>" +
                 "              <tr>" +
-                "                <th colspan=3 style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\"><b>Test Execution Summary</b></th>" +
+                "                <th colspan=3 style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #068bac; color: white;\"><b>Test Execution Summary</b></th>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Project Name</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#projectName</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#projectName</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Timestamp</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#timestamp</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#timestamp</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Environment</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#environment</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#environment</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Execution Time</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#executionTime</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#executionTime</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Execution Status</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#executionStatus</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2; color: #executionColor\"><b>#executionStatus</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Success Rate</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#successRate</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#successRate</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Fail Rate</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#failRate</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failRate</b></td>" +
                 "              </tr>" +
                 "            </table>" +
                 "            <br><br>" +
                 "           <table style=\"width:70%; border:1px solid black; border-collapse:collapse;\">" +
                 "               <col width=45%>" +
                 "               <tr>" +
-                "                   <th colspan=3 style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\"><b>Scenario Information</b></th>" +
+                "                   <th colspan=3 style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #068bac; color: white;\"><b>Scenario Information</b></th>" +
                 "               </tr>" +
                 "               <tr>" +
                 "                   <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\"><b></b></th>" +
@@ -70,23 +71,23 @@ public class EmailTemplate {
                 "               </tr>" +
                 "               <tr>" +
                 "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Total Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#totalScenariosCount</td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#totalScenariosCount</b></td>" +
                 "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"></td>" +
                 "               </tr>" +
                 "               <tr>" +
                 "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Passed Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#passedScenariosCount</td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#passedScenarioPercentage</td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedScenariosCount</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedScenarioPercentage</b></td>" +
                 "               </tr>" +
                 "               <tr>" +
                 "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Failed Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#failedScenariosCount</td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#failedScenarioPercentage</td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedScenariosCount</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedScenarioPercentage</b></td>" +
                 "               </tr>" +
                 "               <tr>" +
                 "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Skipped Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#skippedScenariosCount</td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#skippedScenarioPercentage</td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedScenariosCount</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedScenarioPercentage</b></td>" +
                 "               </tr>" +
                 "           </table>" +
                 "            <img src=\"cid:pie-chart\" alt=\"Pie Chart For Test Execution Results\" align=\"left\" style=\"padding-top: 30px; padding-bottom: 35px;\"> <br><br><br>" +
@@ -94,7 +95,7 @@ public class EmailTemplate {
                 "            <table style=\"width:70%; border:1px solid black; border-collapse:collapse;\">" +
                 "              <col width=45%>" +
                 "              <tr>" +
-                "                <th colspan=3 style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\"><b>Specification Information</b></th>" +
+                "                <th colspan=3 style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #068bac; color: white;\"><b>Specification Information</b></th>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\"><b></b></th>" +
@@ -103,23 +104,23 @@ public class EmailTemplate {
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Total Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#totalSpecsCount</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#totalSpecsCount</b></td>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Passed Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#passedSpecsCount</td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#passedSpecsPercentage</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedSpecsCount</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedSpecsPercentage</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Failed Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#failedSpecsCount</td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\">#failedSpecsPercentage</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedSpecsCount</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedSpecsPercentage</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Skipped Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#skippedSpecsCount</td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\">#skippedSpecsPercentage</td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedSpecsCount</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedSpecsPercentage</b></td>" +
                 "              </tr>" +
                 "            </table>" +
                 "            <br><br>";
@@ -133,7 +134,7 @@ public class EmailTemplate {
                 "            <table id=\"regression_table\" style=\"width:70%; border:1px solid black; border-collapse:collapse;\">" +
                 "               <col width=\"45%\">" +
                 "                   <tr>" +
-                "                       <th colspan=\"8\" style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                       <th colspan=\"8\" style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #068bac; color: white;\">" +
                 "                           <b>Regression Testing Summary</b></th>" +
                 "                   </tr>" +
                 "                   <tr>" +
@@ -157,25 +158,60 @@ public class EmailTemplate {
 
         int iterator = getSpecHeadingList().size();
 
+        String specHeadingColor;
+        String totalScenariosColor;
+        String passedScenariosColor;
+        String failedScenariosColor;
+        String skippedScenariosColor;
+
         for (int i = 0; i < iterator; i++) {
+            int totalScenariosOfSpec = Integer.parseInt(getPassedScenarioCountList().get(i))
+                    + Integer.parseInt(getFailedScenarioCountList().get(i))
+                    + Integer.parseInt(getSkippedScenarioCountList().get(i));
+
+            if (totalScenariosOfSpec == Integer.parseInt(getPassedScenarioCountList().get(i))) {
+                specHeadingColor = GREEN;
+                totalScenariosColor = GREEN;
+                passedScenariosColor = GREEN;
+                failedScenariosColor = GREEN;
+                skippedScenariosColor = GREEN;
+            } else if (totalScenariosOfSpec == Integer.parseInt(getFailedScenarioCountList().get(i))) {
+                specHeadingColor = RED;
+                totalScenariosColor = RED;
+                passedScenariosColor = RED;
+                failedScenariosColor = RED;
+                skippedScenariosColor = RED;
+            } else if (totalScenariosOfSpec == Integer.parseInt(getSkippedScenarioCountList().get(i))) {
+                specHeadingColor = GRAY;
+                totalScenariosColor = GRAY;
+                passedScenariosColor = GRAY;
+                failedScenariosColor = GRAY;
+                skippedScenariosColor = GRAY;
+            } else {
+                specHeadingColor = BLACK;
+                totalScenariosColor = BLACK;
+                passedScenariosColor = GREEN;
+                failedScenariosColor = RED;
+                skippedScenariosColor = GRAY;
+            }
+
             appendHtml = appendHtml.concat("<tr>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>" + getSpecHeadingList().get(i) +
-                    "   </b></td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" +
-                    (Integer.parseInt(getPassedScenarioCountList().get(i)) + Integer.parseInt(getFailedScenarioCountList().get(i)) +
-                            Integer.parseInt(getSkippedScenarioCountList().get(i))) + "</td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getPassedScenarioCountList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getPassedScenarioPercentageList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getFailedScenarioCountList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getFailedScenarioPercentageList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getSkippedScenarioCountList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getSkippedScenarioPercentageList().get(i) +
-                    "   </td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + specHeadingColor
+                    + ";\"><b>" + getSpecHeadingList().get(i) + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + totalScenariosColor
+                    + ";\"><b>" + totalScenariosOfSpec + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + passedScenariosColor
+                    + ";\"><b>" + getPassedScenarioCountList().get(i) + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + passedScenariosColor
+                    + ";\"><b>" + getPassedScenarioPercentageList().get(i) + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + failedScenariosColor
+                    + ";\"><b>" + getFailedScenarioCountList().get(i) + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + failedScenariosColor
+                    + ";\"><b>" + getFailedScenarioPercentageList().get(i) + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + skippedScenariosColor
+                    + ";\"><b>" + getSkippedScenarioCountList().get(i) + "</b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + skippedScenariosColor
+                    + ";\"><b>" + getSkippedScenarioPercentageList().get(i) + "</b></td>" +
                     "</tr>");
         }
 
