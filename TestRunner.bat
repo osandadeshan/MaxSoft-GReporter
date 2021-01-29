@@ -2,8 +2,8 @@
 echo MaxSoft GReporter .............
 
 call mvn clean install -DskipTests
-call mvn gauge:execute -DspecsDir="specs"
+call mvn test-compile gauge:execute -DspecsDir="specs" -Denv="qa"
 
-call mvn clean -DemailConfigEnv=dev install exec:java
+call mvn clean -DemailConfigEnv=qa install exec:java
 echo Exit Code = %ERRORLEVEL%
 if not "%ERRORLEVEL%" == "0" exit /b

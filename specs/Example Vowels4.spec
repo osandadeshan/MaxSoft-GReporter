@@ -1,4 +1,4 @@
-# Example Vowels Specification 1
+# Example Vowels Specification 4
 Project Name : MaxSoft GReporter
 Developer    : Osanda Deshan
 Version      : 1.0.0
@@ -10,10 +10,16 @@ Description  : This is an executable specification file which follows markdown s
 * Vowels in English language are "aeiou".
 
 
-## Vowel counts in single word
+## Vowel counts in single word1
 tags: single word
 
-* The word "gauge" has "3" vowels.
+* The word "gauge" has "3" vowels
+
+
+## Vowel counts in single word2
+tags: single word
+
+* The word "gauge" has "4" vowels.
 
 
 ## Vowel counts in multiple word

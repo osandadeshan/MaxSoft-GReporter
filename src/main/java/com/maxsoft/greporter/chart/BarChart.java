@@ -1,4 +1,4 @@
-package com.maxsoft.greporter;
+package com.maxsoft.greporter.chart;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -16,15 +16,14 @@ import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.TextAnchor;
-import org.json.simple.parser.ParseException;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
+import static com.maxsoft.greporter.util.PropertyReader.read;
+import static com.maxsoft.greporter.Constants.BAR_CHART_PROPERTY_FILE_PATH;
+import static com.maxsoft.greporter.Constants.FILE_SEPARATOR;
 import static com.maxsoft.greporter.JsonReportReader.*;
 
 /*
@@ -38,48 +37,25 @@ import static com.maxsoft.greporter.JsonReportReader.*;
 
 public class BarChart {
 
-    public static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
-    public final static Color LIGHT_GRAY = new Color(223, 223, 223);
-    public final static Color DARK_GRAY = new Color(96, 96, 96);
-    public final static Color GREEN = new Color(76, 153, 0);
-    public final static Color RED = new Color(205, 0, 0);
-    public static final String Y_AXIS_LABEL = "Specification Name/s";
-    public static final String X_AXIS_LABEL = "Count";
-    public static final String PASSED = "Passed";
-    public static final String FAILED = "Failed";
-    public static final String SKIPPED = "Skipped";
-    static Properties barChartProperties = new Properties();
-    static InputStream inputBarChartPropertyFile = null;
-    static String BAR_CHART_TITLE;
-    static String BAR_CHART_IMAGE_PATH;
-    static String BAR_CHART_IMAGE_NAME;
-    static String BAR_CHART_IMAGE_WIDTH;
-    static String fileSeparator = File.separator;
+    private static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
+    private static final Color LIGHT_GRAY = new Color(223, 223, 223);
+    private static final Color DARK_GRAY = new Color(96, 96, 96);
+    private static final Color GREEN = new Color(76, 153, 0);
+    private static final Color RED = new Color(205, 0, 0);
+    private static final String Y_AXIS_LABEL = "Specification Name/s";
+    private static final String X_AXIS_LABEL = "Count";
+    private static final String PASSED = "Passed";
+    private static final String FAILED = "Failed";
+    private static final String SKIPPED = "Skipped";
+    private static String BAR_CHART_IMAGE_PATH;
+    private static String BAR_CHART_IMAGE_NAME;
 
-    public static void save() throws IOException, ParseException {
-        try {
-            inputBarChartPropertyFile = new FileInputStream(CURRENT_DIRECTORY + fileSeparator + "env"
-                    + fileSeparator + "chart" + fileSeparator + "barchart.properties");
-            barChartProperties.load(inputBarChartPropertyFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (inputBarChartPropertyFile != null) {
-                try {
-                    inputBarChartPropertyFile.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
+    public static void save() {
         // Get the property values
-        BAR_CHART_TITLE = barChartProperties.getProperty("bar_chart_title");
-        BAR_CHART_IMAGE_PATH = barChartProperties.getProperty("bar_chart_image_path");
-        BAR_CHART_IMAGE_NAME = barChartProperties.getProperty("bar_chart_image_name");
-        BAR_CHART_IMAGE_WIDTH = barChartProperties.getProperty("bar_chart_image_width");
+        BAR_CHART_IMAGE_PATH = read(BAR_CHART_PROPERTY_FILE_PATH, "bar_chart_image_path");
+        BAR_CHART_IMAGE_NAME = read(BAR_CHART_PROPERTY_FILE_PATH, "bar_chart_image_name");
 
-        String barChartDir = CURRENT_DIRECTORY + fileSeparator + BAR_CHART_IMAGE_PATH;
+        String barChartDir = CURRENT_DIRECTORY + FILE_SEPARATOR + BAR_CHART_IMAGE_PATH;
 
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -92,7 +68,7 @@ public class BarChart {
         }
 
         JFreeChart barChart = ChartFactory.createBarChart(
-                BAR_CHART_TITLE,
+                read(BAR_CHART_PROPERTY_FILE_PATH, "bar_chart_title"),
                 Y_AXIS_LABEL, X_AXIS_LABEL,
                 dataset, PlotOrientation.HORIZONTAL,
                 true, true, false);
@@ -133,8 +109,9 @@ public class BarChart {
                 TextAnchor.TOP_CENTER);
         plot.getRenderer().setBasePositiveItemLabelPosition(position);
 
-        int width = Integer.parseInt(BAR_CHART_IMAGE_WIDTH);
-        int height = setBarChartHeight(iterator);
+        int width = Integer.parseInt(read(BAR_CHART_PROPERTY_FILE_PATH, "bar_chart_image_width"));
+        int height = iterator * Integer.parseInt(read(BAR_CHART_PROPERTY_FILE_PATH,
+                "bar_chart_height_for_one_spec"));
 
         // Save it, if the pi-chart directory is not there create it
         File directory = new File(barChartDir);
@@ -143,26 +120,11 @@ public class BarChart {
         }
 
         File BarChart = new File(getSavedBarChartImagePath());
-        ChartUtilities.saveChartAsPNG(BarChart, barChart, width, height);
-    }
-
-    public static int setBarChartHeight(int noOfSpecs) {
         try {
-            inputBarChartPropertyFile = new FileInputStream(CURRENT_DIRECTORY + fileSeparator + "env"
-                    + fileSeparator + "chart" + fileSeparator + "barchart.properties");
-            barChartProperties.load(inputBarChartPropertyFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (inputBarChartPropertyFile != null) {
-                try {
-                    inputBarChartPropertyFile.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            ChartUtilities.saveChartAsPNG(BarChart, barChart, width, height);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return noOfSpecs * Integer.parseInt(barChartProperties.getProperty("bar_chart_height_for_one_spec"));
     }
 
     public static String getSavedBarChartImageName() {
@@ -170,6 +132,6 @@ public class BarChart {
     }
 
     public static String getSavedBarChartImagePath() {
-        return CURRENT_DIRECTORY + fileSeparator + BAR_CHART_IMAGE_PATH + fileSeparator + BAR_CHART_IMAGE_NAME + ".PNG";
+        return CURRENT_DIRECTORY + FILE_SEPARATOR + BAR_CHART_IMAGE_PATH + FILE_SEPARATOR + BAR_CHART_IMAGE_NAME + ".PNG";
     }
 }

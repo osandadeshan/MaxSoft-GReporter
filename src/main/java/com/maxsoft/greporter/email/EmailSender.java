@@ -1,4 +1,4 @@
-package com.maxsoft.greporter;
+package com.maxsoft.greporter.email;
 
 /*
  * Project Name : MaxSoft GReporter
@@ -12,6 +12,6 @@ package com.maxsoft.greporter;
 public class EmailSender {
 
     public static void main(String[] args) {
-        Email.send(JsonReportReader.getExecutionResults());
+        EmailProcessor.triggerEmail();
     }
 }
