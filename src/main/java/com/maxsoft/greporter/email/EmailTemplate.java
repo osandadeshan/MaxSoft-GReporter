@@ -1,4 +1,4 @@
-package com.maxsoft.greporter;
+package com.maxsoft.greporter.email;
 
 import org.json.simple.parser.ParseException;
 
@@ -16,64 +16,6 @@ import static com.maxsoft.greporter.JsonReportReader.*;
  */
 
 public class EmailTemplate {
-
-    private static String appendToTemplate() throws IOException, ParseException {
-        String appendHtml = "<style>" +
-                "       table#regression_table tr:nth-child(odd){background-color: #f2f2f2}" +
-                "   </style>" +
-                "            <table id=\"regression_table\" style=\"width:70%; border:1px solid black; border-collapse:collapse;\">" +
-                "               <col width=\"45%\">" +
-                "                   <tr>" +
-                "                       <th colspan=\"8\" style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Regression Testing Summary</b></th>" +
-                "                   </tr>" +
-                "                   <tr>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Specification</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Total Scenarios</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Passed Scenario Count</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Passed Scenario Percentage (%)</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Failed Scenario Count</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Failed Scenario Percentage (%)</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Skipped Scenario Count</b></th>" +
-                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
-                "                           <b>Skipped Scenario Percentage (%)</b></th>" +
-                "                   </tr>";
-        int iterator = getSpecHeadingList().size();
-        for (int i = 0; i < iterator; i++) {
-            appendHtml = appendHtml.concat("<tr>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>" + getSpecHeadingList().get(i) +
-                    "   </b></td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" +
-                    (Integer.parseInt(getPassedScenarioCountList().get(i)) + Integer.parseInt(getFailedScenarioCountList().get(i)) +
-                            Integer.parseInt(getSkippedScenarioCountList().get(i))) + "</td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getPassedScenarioCountList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getPassedScenarioPercentageList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getFailedScenarioCountList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getFailedScenarioPercentageList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getSkippedScenarioCountList().get(i) +
-                    "   </td>" +
-                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getSkippedScenarioPercentageList().get(i) +
-                    "   </td>" +
-                    "</tr>");
-        }
-        String lastAppend = "</table>" +
-                "<br><br>" +
-                "<img src=\"cid:bar-chart\" alt=\"Bar Chart For Test Execution Results\" align=\"left\" style=\"border: 1px solid black;\">" +
-                "</body>" +
-                "</html>";
-        return appendHtml + lastAppend;
-    }
 
     public static String get() throws IOException, ParseException {
         String template = "<!DOCTYPE html>" +
@@ -181,6 +123,67 @@ public class EmailTemplate {
                 "              </tr>" +
                 "            </table>" +
                 "            <br><br>";
-        return template + appendToTemplate();
+        return template + getRegressionTestSummary();
+    }
+
+    public static String getRegressionTestSummary() {
+        String appendHtml = "<style>" +
+                "       table#regression_table tr:nth-child(odd){background-color: #f2f2f2}" +
+                "   </style>" +
+                "            <table id=\"regression_table\" style=\"width:70%; border:1px solid black; border-collapse:collapse;\">" +
+                "               <col width=\"45%\">" +
+                "                   <tr>" +
+                "                       <th colspan=\"8\" style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Regression Testing Summary</b></th>" +
+                "                   </tr>" +
+                "                   <tr>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Specification</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Total Scenarios</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Passed Scenario Count</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Passed Scenario Percentage (%)</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Failed Scenario Count</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Failed Scenario Percentage (%)</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Skipped Scenario Count</b></th>" +
+                "                       <th style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #08A7CE; color: white;\">" +
+                "                           <b>Skipped Scenario Percentage (%)</b></th>" +
+                "                   </tr>";
+
+        int iterator = getSpecHeadingList().size();
+
+        for (int i = 0; i < iterator; i++) {
+            appendHtml = appendHtml.concat("<tr>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>" + getSpecHeadingList().get(i) +
+                    "   </b></td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" +
+                    (Integer.parseInt(getPassedScenarioCountList().get(i)) + Integer.parseInt(getFailedScenarioCountList().get(i)) +
+                            Integer.parseInt(getSkippedScenarioCountList().get(i))) + "</td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getPassedScenarioCountList().get(i) +
+                    "   </td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getPassedScenarioPercentageList().get(i) +
+                    "   </td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getFailedScenarioCountList().get(i) +
+                    "   </td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getFailedScenarioPercentageList().get(i) +
+                    "   </td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getSkippedScenarioCountList().get(i) +
+                    "   </td>" +
+                    "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">" + getSkippedScenarioPercentageList().get(i) +
+                    "   </td>" +
+                    "</tr>");
+        }
+
+        String lastAppend = "</table>" +
+                "<br><br>" +
+                "<img src=\"cid:bar-chart\" alt=\"Bar Chart For Test Execution Results\" align=\"left\" style=\"border: 1px solid black;\">" +
+                "</body>" +
+                "</html>";
+        return appendHtml + lastAppend;
     }
 }
