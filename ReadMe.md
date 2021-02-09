@@ -99,7 +99,8 @@ MaxSoft GReporter is an automated solution for this issue. It acts as a Java plu
 <br />
 
 ## MaxSoft GReporter Tutorials
-- [MaxSoft GReporter](https://medium.com/greporter/maxsoft-email-client-for-gauge-8ae8af8ad32f)
+- Medium - [MaxSoft GReporter](https://medium.com/greporter/maxsoft-email-client-for-gauge-8ae8af8ad32f)
+- YouTube - [How to use MaxSoft GReporter for email reporting in Gauge framework](https://youtu.be/nZGMtcQPzxY)
 <br />
 
 ## How to use MaxSoft GReporter?
