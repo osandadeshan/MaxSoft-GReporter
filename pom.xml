@@ -6,7 +6,7 @@
 
     <groupId>com.maxsoft.greporter</groupId>
     <artifactId>maxsoft-greporter</artifactId>
-    <version>1.0.8</version>
+    <version>1.1.0</version>
 
     <build>
         <plugins>
