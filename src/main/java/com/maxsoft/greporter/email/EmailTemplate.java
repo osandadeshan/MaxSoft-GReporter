@@ -1,9 +1,5 @@
 package com.maxsoft.greporter.email;
 
-import org.json.simple.parser.ParseException;
-
-import java.io.IOException;
-
 import static com.maxsoft.greporter.Constants.*;
 import static com.maxsoft.greporter.JsonReportReader.*;
 
@@ -18,7 +14,7 @@ import static com.maxsoft.greporter.JsonReportReader.*;
 
 public class EmailTemplate {
 
-    public static String get() throws IOException, ParseException {
+    public static String getTemplate() {
         String template = "<!DOCTYPE html>" +
                 "            <html>" +
                 "            <head>" +
@@ -75,19 +71,19 @@ public class EmailTemplate {
                 "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"></td>" +
                 "               </tr>" +
                 "               <tr>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Passed Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedScenariosCount</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedScenarioPercentage</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GREEN + ";\"><b>Passed Scenarios</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GREEN + ";\"><b>#passedScenariosCount</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GREEN + ";\"><b>#passedScenarioPercentage</b></td>" +
                 "               </tr>" +
                 "               <tr>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Failed Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedScenariosCount</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedScenarioPercentage</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + RED + "; background-color: #f2f2f2\"><b>Failed Scenarios</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + RED + "; background-color: #f2f2f2\"><b>#failedScenariosCount</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + RED + "; background-color: #f2f2f2\"><b>#failedScenarioPercentage</b></td>" +
                 "               </tr>" +
                 "               <tr>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Skipped Scenarios</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedScenariosCount</b></td>" +
-                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedScenarioPercentage</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GRAY + ";\"><b>Skipped Scenarios</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GRAY + ";\"><b>#skippedScenariosCount</b></td>" +
+                "                   <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GRAY + ";\"><b>#skippedScenarioPercentage</b></td>" +
                 "               </tr>" +
                 "           </table>" +
                 "            <img src=\"cid:pie-chart\" alt=\"Pie Chart For Test Execution Results\" align=\"left\" style=\"padding-top: 30px; padding-bottom: 35px;\"> <br><br><br>" +
@@ -108,19 +104,19 @@ public class EmailTemplate {
                 "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"></td>" +
                 "              </tr>" +
                 "              <tr>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Passed Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedSpecsCount</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#passedSpecsPercentage</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GREEN + ";\"><b>Passed Specifications</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GREEN + ";\"><b>#passedSpecsCount</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GREEN + ";\"><b>#passedSpecsPercentage</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>Failed Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedSpecsCount</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; background-color: #f2f2f2\"><b>#failedSpecsPercentage</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + RED + "; background-color: #f2f2f2\"><b>Failed Specifications</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + RED + "; background-color: #f2f2f2\"><b>#failedSpecsCount</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + RED + "; background-color: #f2f2f2\"><b>#failedSpecsPercentage</b></td>" +
                 "              </tr>" +
                 "              <tr>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>Skipped Specifications</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedSpecsCount</b></td>" +
-                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black;\"><b>#skippedSpecsPercentage</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GRAY + ";\"><b>Skipped Specifications</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GRAY + ";\"><b>#skippedSpecsCount</b></td>" +
+                "                <td style=\"text-align: left; padding: 8px; border: 1px solid black; color: " + GRAY + ";\"><b>#skippedSpecsPercentage</b></td>" +
                 "              </tr>" +
                 "            </table>" +
                 "            <br><br>";
@@ -157,6 +153,8 @@ public class EmailTemplate {
                 "                   </tr>";
 
         int iterator = getSpecHeadingList().size();
+        setScenarioExecutionStatusAsCounts();
+        setScenarioExecutionStatusAsPercentages();
 
         String specHeadingColor;
         String totalScenariosColor;
@@ -165,6 +163,7 @@ public class EmailTemplate {
         String skippedScenariosColor;
 
         for (int i = 0; i < iterator; i++) {
+
             int totalScenariosOfSpec = Integer.parseInt(getPassedScenarioCountList().get(i))
                     + Integer.parseInt(getFailedScenarioCountList().get(i))
                     + Integer.parseInt(getSkippedScenarioCountList().get(i));
@@ -175,18 +174,21 @@ public class EmailTemplate {
                 passedScenariosColor = GREEN;
                 failedScenariosColor = GREEN;
                 skippedScenariosColor = GREEN;
+
             } else if (totalScenariosOfSpec == Integer.parseInt(getFailedScenarioCountList().get(i))) {
                 specHeadingColor = RED;
                 totalScenariosColor = RED;
                 passedScenariosColor = RED;
                 failedScenariosColor = RED;
                 skippedScenariosColor = RED;
+
             } else if (totalScenariosOfSpec == Integer.parseInt(getSkippedScenarioCountList().get(i))) {
                 specHeadingColor = GRAY;
                 totalScenariosColor = GRAY;
                 passedScenariosColor = GRAY;
                 failedScenariosColor = GRAY;
                 skippedScenariosColor = GRAY;
+
             } else {
                 specHeadingColor = BLACK;
                 totalScenariosColor = BLACK;

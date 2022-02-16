@@ -21,10 +21,10 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import static com.maxsoft.greporter.util.PropertyReader.read;
 import static com.maxsoft.greporter.Constants.BAR_CHART_PROPERTY_FILE_PATH;
 import static com.maxsoft.greporter.Constants.FILE_SEPARATOR;
 import static com.maxsoft.greporter.JsonReportReader.*;
+import static com.maxsoft.greporter.util.PropertyReader.read;
 
 /*
   Project Name : MaxSoft GReporter
@@ -60,6 +60,7 @@ public class BarChart {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         int iterator = getSpecHeadingList().size();
+        setScenarioExecutionStatusAsCounts();
 
         for (int i = 0; i < iterator; i++) {
             dataset.addValue(Integer.valueOf(getFailedScenarioCountList().get(i)), FAILED, getSpecHeadingList().get(i));
@@ -84,8 +85,6 @@ public class BarChart {
 
         chartPanel.setBackground(Color.WHITE);
         barChart.getPlot().setBackgroundPaint(LIGHT_GRAY);
-//        barChart.setBorderVisible(true);
-//        barChart.setBorderPaint(Color.BLACK);
         ((AbstractRenderer) plot.getRenderer()).setBaseLegendShape(new Rectangle(20, 20));
         LegendTitle legend = barChart.getLegend();
         Font labelFont = new Font("SansSerif", Font.BOLD, 14);
@@ -116,7 +115,8 @@ public class BarChart {
         // Save it, if the pi-chart directory is not there create it
         File directory = new File(barChartDir);
         if (!directory.exists()) {
-            directory.mkdirs();
+            boolean isBarChartDirectoryCreated = directory.mkdirs();
+            System.out.println("Is bar chart directory created: " + isBarChartDirectoryCreated);
         }
 
         File BarChart = new File(getSavedBarChartImagePath());

@@ -30,6 +30,12 @@ import static com.maxsoft.greporter.Constants.*;
 public class JsonReportReader {
 
     private static final DecimalFormat decimalFormat = new DecimalFormat(".##");
+    private static final List<String> passedScenarioCountList = new ArrayList<>();
+    private static final List<String> failedScenarioCountList = new ArrayList<>();
+    private static final List<String> skippedScenarioCountList = new ArrayList<>();
+    private static final List<String> passedScenariosPercentageList = new ArrayList<>();
+    private static final List<String> failedScenariosPercentageList = new ArrayList<>();
+    private static final List<String> skippedScenariosPercentageList = new ArrayList<>();
 
     public static String getProjectName() {
         return getJsonAttributeValueAsString("$.projectName");
@@ -135,93 +141,70 @@ public class JsonReportReader {
         return specHeadingList;
     }
 
-    public static List<String> getPassedScenarioCountList() {
-        List<String> passedScenarioCountList = new ArrayList<>();
-
+    public static void setScenarioExecutionStatusAsCounts() {
         for (Object object : getSpecResultsAsJsonArray()) {
-            JSONObject jsonObject1 = (JSONObject) object;
-            String passedScenarioCount = jsonObject1.get("passedScenarioCount").toString();
+            JSONObject jsonObject = (JSONObject) object;
+
+            String passedScenarioCount = jsonObject.get("passedScenarioCount").toString();
+            String failedScenarioCount = jsonObject.get("failedScenarioCount").toString();
+            String skippedScenarioCount = jsonObject.get("skippedScenarioCount").toString();
+
             passedScenarioCountList.add(passedScenarioCount);
+            failedScenarioCountList.add(failedScenarioCount);
+            skippedScenarioCountList.add(skippedScenarioCount);
         }
+    }
+
+    public static List<String> getPassedScenarioCountList() {
         return passedScenarioCountList;
     }
 
-    public static List<String> getPassedScenarioPercentageList() {
-        List<String> passedScenariosPercentageList = new ArrayList<>();
-
-        for (Object object : getSpecResultsAsJsonArray()) {
-            JSONObject jsonObject1 = (JSONObject) object;
-            int passedScenarioCount = Integer.parseInt(jsonObject1.get("passedScenarioCount").toString());
-            int failedScenarioCount = Integer.parseInt(jsonObject1.get("failedScenarioCount").toString());
-            int skippedScenarioCount = Integer.parseInt(jsonObject1.get("skippedScenarioCount").toString());
-            int totalScenarioCount = passedScenarioCount + failedScenarioCount + skippedScenarioCount;
-            double passedScenariosPercentage = 0;
-            if (totalScenarioCount != 0) {
-                passedScenariosPercentage = Double.parseDouble(decimalFormat
-                        .format((double) (passedScenarioCount * 100) / (double) totalScenarioCount));
-            }
-            passedScenariosPercentageList.add(passedScenariosPercentage + "%");
-        }
-        return passedScenariosPercentageList;
-    }
-
     public static List<String> getFailedScenarioCountList() {
-        List<String> failedScenarioCountList = new ArrayList<>();
-
-        for (Object object : getSpecResultsAsJsonArray()) {
-            JSONObject jsonObject1 = (JSONObject) object;
-            String failedScenarioCount = jsonObject1.get("failedScenarioCount").toString();
-            failedScenarioCountList.add(failedScenarioCount);
-        }
         return failedScenarioCountList;
     }
 
-    public static List<String> getFailedScenarioPercentageList() {
-        List<String> failedScenariosPercentageList = new ArrayList<>();
-
-        for (Object object : getSpecResultsAsJsonArray()) {
-            JSONObject jsonObject1 = (JSONObject) object;
-            int passedScenarioCount = Integer.parseInt(jsonObject1.get("passedScenarioCount").toString());
-            int failedScenarioCount = Integer.parseInt(jsonObject1.get("failedScenarioCount").toString());
-            int skippedScenarioCount = Integer.parseInt(jsonObject1.get("skippedScenarioCount").toString());
-            int totalScenarioCount = passedScenarioCount + failedScenarioCount + skippedScenarioCount;
-            double failedScenariosPercentage = 0;
-            if (totalScenarioCount != 0) {
-                failedScenariosPercentage = Double.parseDouble(decimalFormat
-                        .format((double) (failedScenarioCount * 100) / (double) totalScenarioCount));
-            }
-            failedScenariosPercentageList.add(failedScenariosPercentage + "%");
-        }
-        return failedScenariosPercentageList;
-    }
-
     public static List<String> getSkippedScenarioCountList() {
-        List<String> skippedScenarioCountList = new ArrayList<>();
-
-        for (Object object : getSpecResultsAsJsonArray()) {
-            JSONObject jsonObject1 = (JSONObject) object;
-            String skippedScenarioCount = jsonObject1.get("skippedScenarioCount").toString();
-            skippedScenarioCountList.add(skippedScenarioCount);
-        }
         return skippedScenarioCountList;
     }
 
-    public static List<String> getSkippedScenarioPercentageList() {
-        List<String> skippedScenariosPercentageList = new ArrayList<>();
-
+    public static void setScenarioExecutionStatusAsPercentages() {
         for (Object object : getSpecResultsAsJsonArray()) {
             JSONObject jsonObject = (JSONObject) object;
+
             int passedScenarioCount = Integer.parseInt(jsonObject.get("passedScenarioCount").toString());
             int failedScenarioCount = Integer.parseInt(jsonObject.get("failedScenarioCount").toString());
             int skippedScenarioCount = Integer.parseInt(jsonObject.get("skippedScenarioCount").toString());
+
             int totalScenarioCount = passedScenarioCount + failedScenarioCount + skippedScenarioCount;
+
+            double passedScenariosPercentage = 0;
+            double failedScenariosPercentage = 0;
             double skippedScenariosPercentage = 0;
+
             if (totalScenarioCount != 0) {
+                passedScenariosPercentage = Double.parseDouble(decimalFormat
+                        .format((double) (passedScenarioCount * 100) / (double) totalScenarioCount));
+                failedScenariosPercentage = Double.parseDouble(decimalFormat
+                        .format((double) (failedScenarioCount * 100) / (double) totalScenarioCount));
                 skippedScenariosPercentage = Double.parseDouble(decimalFormat
                         .format((double) (skippedScenarioCount * 100) / (double) totalScenarioCount));
             }
+
+            passedScenariosPercentageList.add(passedScenariosPercentage + "%");
+            failedScenariosPercentageList.add(failedScenariosPercentage + "%");
             skippedScenariosPercentageList.add(skippedScenariosPercentage + "%");
         }
+    }
+
+    public static List<String> getPassedScenarioPercentageList() {
+        return passedScenariosPercentageList;
+    }
+
+    public static List<String> getFailedScenarioPercentageList() {
+        return failedScenariosPercentageList;
+    }
+
+    public static List<String> getSkippedScenarioPercentageList() {
         return skippedScenariosPercentageList;
     }
 

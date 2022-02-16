@@ -2,17 +2,15 @@ package com.maxsoft.greporter.email;
 
 import com.maxsoft.greporter.chart.BarChart;
 import com.maxsoft.greporter.chart.PieChart;
-import org.json.simple.parser.ParseException;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.Properties;
 
@@ -59,7 +57,7 @@ public class EmailProcessor {
             props.put("mail.smtp.port", senderEmailSmtpPort);
 
             Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
+                    new Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(senderEmailAddress, senderEmailPassword);
                         }
@@ -69,20 +67,20 @@ public class EmailProcessor {
                 // Create a default MimeMessage object.
                 Message message = new MimeMessage(session);
 
-                // Set From: header field of the header.
+                // Set From: Header field of the header.
                 message.setFrom(new InternetAddress(senderEmailAddress));
 
-                // Set To: header field of the header.
+                // Set To: Header field of the header.
                 message.setRecipients(Message.RecipientType.TO,
                         InternetAddress.parse(recipientsEmailAddresses));
 
-                // Set Subject: header field
+                // Set Subject: Header field
                 message.setSubject(emailSubject);
 
                 // This mail has 2 parts, the BODY and the embedded image
                 MimeMultipart multipart = new MimeMultipart("related");
 
-                // first part (the html)
+                // First part (The html)
                 BodyPart messageBodyPart = new MimeBodyPart();
                 String htmlText = "<h2 style=\"color:black;\"> Test Execution Status: " + "<span style=\"color:"
                         + getExecutionStatusColor() + ";\">" + getExecutionStatus()
@@ -90,10 +88,11 @@ public class EmailProcessor {
                         + emailBodyTitleHeadingSize + ">" + "<br />" + emailBody + "<br /><br /><br />"
                         + getExecutionResults();
                 messageBodyPart.setContent(htmlText, "text/html");
-                // add it
+
+                // Add the HTMl to the multipart
                 multipart.addBodyPart(messageBodyPart);
 
-                // second part (the pie chart)
+                // Second part (The pie chart)
                 messageBodyPart = new MimeBodyPart();
                 PieChart.save(getPassedScenariosCount(), getFailedScenariosCount(), getSkippedScenariosCount());
                 DataSource fds = new FileDataSource(
@@ -103,10 +102,10 @@ public class EmailProcessor {
                 messageBodyPart.setHeader("Content-ID", "<pie-chart>");
                 messageBodyPart.setFileName(PieChart.getSavedPieChartImageName());
 
-                // add pie chart to the multipart
+                // Add pie chart to the multipart
                 multipart.addBodyPart(messageBodyPart);
 
-                // third part (the bar chart)
+                // Third part (The bar chart)
                 messageBodyPart = new MimeBodyPart();
                 BarChart.save();
                 DataSource fds2 = new FileDataSource(
@@ -116,14 +115,14 @@ public class EmailProcessor {
                 messageBodyPart.setHeader("Content-ID", "<bar-chart>");
                 messageBodyPart.setFileName(BarChart.getSavedBarChartImageName());
 
-                // add bar chart to the multipart
+                // Add bar chart to the multipart
                 multipart.addBodyPart(messageBodyPart);
 
-                // put everything together
+                // Put everything together
                 message.setContent(multipart);
+
                 // Send message
                 Transport.send(message);
-
                 System.out.println("Sent message successfully....");
 
             } catch (MessagingException e) {
@@ -137,37 +136,31 @@ public class EmailProcessor {
     }
 
     private static String getExecutionResults() {
-        String executionResults = null;
-        try {
-            executionResults = EmailTemplate.get()
-                    .replaceAll("#projectName", getProjectName())
-                    .replaceAll("#timestamp", getTimestamp())
-                    .replaceAll("#environment", getEnvironment())
-                    .replaceAll("#executionTime", milliSecondsToTime(getExecutionTime()))
-                    .replaceAll("#executionStatus", getExecutionStatus())
-                    .replaceAll("#executionColor", getExecutionStatusColor())
-                    .replaceAll("#successRate", getPassedScenariosPercentage() + "%")
-                    .replaceAll("#failRate", getFailedScenariosPercentage() + "%")
+        return EmailTemplate.getTemplate()
+                .replaceAll("#projectName", getProjectName())
+                .replaceAll("#timestamp", getTimestamp())
+                .replaceAll("#environment", getEnvironment())
+                .replaceAll("#executionTime", milliSecondsToTime(getExecutionTime()))
+                .replaceAll("#executionStatus", getExecutionStatus())
+                .replaceAll("#executionColor", getExecutionStatusColor())
+                .replaceAll("#successRate", getPassedScenariosPercentage() + "%")
+                .replaceAll("#failRate", getFailedScenariosPercentage() + "%")
 
-                    .replaceAll("#totalScenariosCount", String.valueOf(getTotalScenariosCount()))
-                    .replaceAll("#passedScenariosCount", String.valueOf(getPassedScenariosCount()))
-                    .replaceAll("#passedScenarioPercentage", getPassedScenariosPercentage() + "%")
-                    .replaceAll("#failedScenariosCount", String.valueOf(getFailedScenariosCount()))
-                    .replaceAll("#failedScenarioPercentage", getFailedScenariosPercentage() + "%")
-                    .replaceAll("#skippedScenariosCount", String.valueOf(getSkippedScenariosCount()))
-                    .replaceAll("#skippedScenarioPercentage", getSkippedScenariosPercentage() + "%")
+                .replaceAll("#totalScenariosCount", String.valueOf(getTotalScenariosCount()))
+                .replaceAll("#passedScenariosCount", String.valueOf(getPassedScenariosCount()))
+                .replaceAll("#passedScenarioPercentage", getPassedScenariosPercentage() + "%")
+                .replaceAll("#failedScenariosCount", String.valueOf(getFailedScenariosCount()))
+                .replaceAll("#failedScenarioPercentage", getFailedScenariosPercentage() + "%")
+                .replaceAll("#skippedScenariosCount", String.valueOf(getSkippedScenariosCount()))
+                .replaceAll("#skippedScenarioPercentage", getSkippedScenariosPercentage() + "%")
 
-                    .replaceAll("#totalSpecsCount", String.valueOf(getTotalSpecsCount()))
-                    .replaceAll("#passedSpecsCount", String.valueOf(getPassedSpecsCount()))
-                    .replaceAll("#passedSpecsPercentage", getPassedSpecsPercentage() + "%")
-                    .replaceAll("#failedSpecsCount", String.valueOf(getFailedSpecsCount()))
-                    .replaceAll("#failedSpecsPercentage", getFailedSpecsPercentage() + "%")
-                    .replaceAll("#skippedSpecsCount", String.valueOf(getSkippedSpecsCount()))
-                    .replaceAll("#skippedSpecsPercentage", getSkippedSpecsPercentage() + "%");
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-        return executionResults;
+                .replaceAll("#totalSpecsCount", String.valueOf(getTotalSpecsCount()))
+                .replaceAll("#passedSpecsCount", String.valueOf(getPassedSpecsCount()))
+                .replaceAll("#passedSpecsPercentage", getPassedSpecsPercentage() + "%")
+                .replaceAll("#failedSpecsCount", String.valueOf(getFailedSpecsCount()))
+                .replaceAll("#failedSpecsPercentage", getFailedSpecsPercentage() + "%")
+                .replaceAll("#skippedSpecsCount", String.valueOf(getSkippedSpecsCount()))
+                .replaceAll("#skippedSpecsPercentage", getSkippedSpecsPercentage() + "%");
     }
 
     private static void setEmailConfigurations() {
