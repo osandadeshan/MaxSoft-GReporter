@@ -13,6 +13,7 @@ import java.io.File;
 
 public class Constants {
 
+    // Directory and File Path Constants
     public static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
     public static final String FILE_SEPARATOR = File.separator;
     public static final String PIE_CHART_PROPERTY_FILE_PATH = CURRENT_DIRECTORY + FILE_SEPARATOR + "env"
@@ -23,6 +24,8 @@ public class Constants {
             + FILE_SEPARATOR + "email" + FILE_SEPARATOR + "email.properties";
     public static final String JSON_FILE_PATH = System.getProperty("user.dir") + FILE_SEPARATOR + "reports"
             + FILE_SEPARATOR + "json-report" + FILE_SEPARATOR + "result.json";
+
+    // Color Code Constants
     public static final String GREEN = "green";
     public static final String RED = "red";
     public static final String GRAY = "#43433D";

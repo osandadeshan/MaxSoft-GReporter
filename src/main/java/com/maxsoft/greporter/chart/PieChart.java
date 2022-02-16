@@ -9,8 +9,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import static com.maxsoft.greporter.util.PropertyReader.read;
 import static com.maxsoft.greporter.Constants.*;
+import static com.maxsoft.greporter.util.PropertyReader.read;
 
 /*
  * Project Name : MaxSoft GReporter
@@ -60,22 +60,17 @@ public class PieChart {
         chart.addSeries("Passed", passedCount).setFillColor(GREEN);
         chart.addSeries("Skipped", skippedCount).setFillColor(DARK_GRAY);
 
-        // Show it
-        //new SwingWrapper(chart).displayChart();
-
         // Save it, if the pi-chart directory is not there create it
         File directory = new File(pieChartDir);
         if (!directory.exists()) {
-            directory.mkdirs();
+            boolean isPieChartDirectoryCreated = directory.mkdirs();
+            System.out.println("Is pie chart directory created: " + isPieChartDirectoryCreated);
         }
         try {
             BitmapEncoder.saveBitmap(chart, imageDir, BitmapEncoder.BitmapFormat.PNG);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // or save it in high-res
-        //BitmapEncoder.saveBitmapWithDPI(chart, filePath, BitmapEncoder.BitmapFormat.PNG, 300);
     }
 
     public static String getSavedPieChartImageName() {
